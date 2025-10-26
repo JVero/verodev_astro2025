@@ -270,35 +270,49 @@ const ConnectDotsTask = () => {
   return (
     <div className="w-full max-w-4xl mx-auto p-6 space-y-4">
       <div className="bg-white rounded-lg shadow-lg p-6">
-        <h2 className="text-2xl font-bold mb-4">Connect the Dots Task</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">Connect the Dots Task</h2>
         
-        <div className="mb-4 space-y-2">
-          <div className="flex items-center gap-4">
-            <label className="font-semibold">Difficulty:</label>
-            <select 
-              value={difficulty} 
-              onChange={(e) => setDifficulty(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg"
-              disabled={isDrawing || (currentIndex > 0 && !completed)}
-            >
-              <option value="numbers">Numbers (1→2→3...)</option>
-              <option value="alternating">Alternating (1→A→2→B...)</option>
-            </select>
+        <div className="mb-6 space-y-4">
+          <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <div className="flex items-center gap-4">
+              <label className="font-semibold text-gray-700">Difficulty:</label>
+              <div className="flex items-center gap-3">
+                <span className={`text-sm font-medium ${difficulty === 'numbers' ? 'text-blue-600' : 'text-gray-500'}`}>
+                  Numbers
+                </span>
+                <button
+                  onClick={() => setDifficulty(difficulty === 'numbers' ? 'alternating' : 'numbers')}
+                  disabled={isDrawing || (currentIndex > 0 && !completed)}
+                  className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                    difficulty === 'alternating' ? 'bg-blue-600' : 'bg-gray-300'
+                  } ${(isDrawing || (currentIndex > 0 && !completed)) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                >
+                  <span
+                    className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
+                      difficulty === 'alternating' ? 'translate-x-7' : 'translate-x-1'
+                    }`}
+                  />
+                </button>
+                <span className={`text-sm font-medium ${difficulty === 'alternating' ? 'text-blue-600' : 'text-gray-500'}`}>
+                  Alternating
+                </span>
+              </div>
+            </div>
             
             <button
               onClick={resetTask}
-              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+              className="px-6 py-2 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 active:bg-red-700 transition-colors shadow-sm"
             >
-              Reset Task
+              Reset
             </button>
           </div>
           
-          <div className="text-sm text-gray-600">
-            <p><strong>Instructions:</strong> Click and hold on the highlighted dot, then drag to connect the dots in sequence. Release the mouse when you reach the next dot. If you release too early, the task resets!</p>
+          <div className="text-sm text-gray-600 bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <p><strong className="text-blue-800">Instructions:</strong> Click and hold on any gray dot to start, then drag to connect the dots in sequence. Release the mouse when you reach the next dot. If you release too early, the task resets!</p>
           </div>
         </div>
         
-        <div className="border-2 border-gray-300 rounded-lg overflow-hidden mb-4">
+        <div className="border-2 border-gray-300 rounded-lg overflow-hidden mb-4 shadow-inner">
           <canvas
             ref={canvasRef}
             width={CANVAS_WIDTH}
@@ -313,42 +327,44 @@ const ConnectDotsTask = () => {
         </div>
         
         {completed && (
-          <div className="bg-green-100 border border-green-400 rounded-lg p-4 space-y-3">
-            <p className="text-green-800 font-semibold text-lg">✓ Task Completed!</p>
+          <div className="bg-green-50 border-2 border-green-400 rounded-lg p-4 space-y-3">
+            <p className="text-green-800 font-semibold text-lg flex items-center gap-2">
+              <span className="text-2xl">✓</span> Task Completed!
+            </p>
             <div className="flex gap-3">
               <button
                 onClick={() => setShowData(!showData)}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                className="px-5 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 active:bg-blue-700 transition-colors shadow-sm"
               >
                 {showData ? 'Hide' : 'Show'} Trajectory Data
               </button>
               <button
                 onClick={downloadTrajectoryData}
-                className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+                className="px-5 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 active:bg-green-800 transition-colors shadow-sm"
               >
-                Download JSON Data
+                Download JSON
               </button>
             </div>
             
             {showData && (
               <div className="mt-4 space-y-4">
-                <div className="bg-white rounded p-4">
-                  <h3 className="font-semibold mb-2">Trajectory Statistics</h3>
+                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+                  <h3 className="font-semibold mb-3 text-gray-800">Trajectory Statistics</h3>
                   <div className="overflow-x-auto">
                     <table className="min-w-full text-sm">
                       <thead>
-                        <tr className="border-b">
-                          <th className="text-left py-2 px-3">Segment</th>
-                          <th className="text-right py-2 px-3">Points</th>
-                          <th className="text-right py-2 px-3">Distance (px)</th>
-                          <th className="text-right py-2 px-3">Duration (ms)</th>
-                          <th className="text-right py-2 px-3">Avg Velocity (px/s)</th>
+                        <tr className="border-b-2 border-gray-300">
+                          <th className="text-left py-2 px-3 font-semibold text-gray-700">Segment</th>
+                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Points</th>
+                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Distance (px)</th>
+                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Duration (ms)</th>
+                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Avg Velocity (px/s)</th>
                         </tr>
                       </thead>
                       <tbody>
                         {getTrajectoryStats()?.map((stat, idx) => (
-                          <tr key={idx} className="border-b">
-                            <td className="py-2 px-3">{stat.segment}</td>
+                          <tr key={idx} className="border-b border-gray-200 hover:bg-gray-50">
+                            <td className="py-2 px-3 font-medium">{stat.segment}</td>
                             <td className="text-right py-2 px-3">{stat.points}</td>
                             <td className="text-right py-2 px-3">{stat.distance}</td>
                             <td className="text-right py-2 px-3">{stat.duration}</td>
@@ -360,9 +376,9 @@ const ConnectDotsTask = () => {
                   </div>
                 </div>
                 
-                <div className="bg-white rounded p-4">
-                  <h3 className="font-semibold mb-2">Raw Data Preview</h3>
-                  <pre className="text-xs bg-gray-50 p-3 rounded overflow-auto max-h-60">
+                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+                  <h3 className="font-semibold mb-3 text-gray-800">Raw Data Preview</h3>
+                  <pre className="text-xs bg-gray-50 p-3 rounded-lg overflow-auto max-h-60 border border-gray-200 font-mono">
                     {JSON.stringify({
                       difficulty,
                       numSegments: trajectoryData.length,
@@ -371,7 +387,7 @@ const ConnectDotsTask = () => {
                     }, null, 2)}
                   </pre>
                   <p className="text-xs text-gray-600 mt-2">
-                    Click "Download JSON Data" to get the full trajectory data for analysis
+                    Click "Download JSON" to get the full trajectory data for analysis
                   </p>
                 </div>
               </div>
@@ -380,9 +396,9 @@ const ConnectDotsTask = () => {
         )}
         
         {!completed && currentIndex > 0 && (
-          <div className="bg-blue-100 border border-blue-400 rounded-lg p-3">
-            <p className="text-blue-800">
-              Progress: {currentIndex} / {NUM_TARGETS} targets completed
+          <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-3">
+            <p className="text-blue-800 font-medium">
+              Progress: <span className="font-bold">{currentIndex} / {NUM_TARGETS}</span> targets completed
             </p>
           </div>
         )}
