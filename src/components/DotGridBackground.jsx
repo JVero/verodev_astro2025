@@ -166,7 +166,7 @@ const DotGridBackground = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
         // Draw each dot individually to avoid path issues
-        ctx.fillStyle = '#9ca3af';
+        ctx.fillStyle = '#3b82f6'; // data-blue color
         dotsRef.current.forEach(dot => {
           ctx.beginPath();
           ctx.arc(dot.currentX, dot.currentY, DOT_RADIUS, 0, Math.PI * 2);

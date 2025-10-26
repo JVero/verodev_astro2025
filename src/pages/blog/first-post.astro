@@ -6,14 +6,15 @@ import AutoCitations from '../../components/AutoCitations.astro';
 
 <Layout>
 	<main class="max-w-4xl mx-auto px-6 py-12 relative">
-		<article class="prose prose-lg max-w-none bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-sm">
-			<header class="mb-8 pb-6 border-b border-gray-200">
-				<h1 class="text-4xl font-bold mb-4">What I did for my master's thesis</h1>
+		<article class="prose prose-lg max-w-none bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20 animate-fade-in relative overflow-hidden">
+			<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400"></div>
+			<header class="mb-8 pb-6 border-b border-gray-200 animate-slide-up">
+				<h1 class="text-5xl font-bold mb-4 tracking-tight">What I did for my master's thesis</h1>
 				<p class="text-gray-600 text-lg">A study of motor control using Connect the Dots</p>
 				<time class="text-sm text-gray-500" datetime="2025-10-25">October 2025</time>
 			</header>
 
-			<div class="mb-8">
+			<div class="mb-8 animate-fade-in">
 				<p class="text-xl text-gray-700 leading-relaxed">
 					Motor control and human movement patterns have long fascinated researchers in neuroscience, 
 					psychology, and human-computer interaction [https://example.com/motor-control]. Understanding how we execute precise movements 
@@ -28,8 +29,11 @@ import AutoCitations from '../../components/AutoCitations.astro';
 				</p>
 			</div>
 
-			<section class="my-12">
-				<h2 class="text-2xl font-bold mb-4">Try the Interactive Task</h2>
+			<section class="my-12 animate-slide-up">
+				<div class="flex items-center gap-3 mb-4">
+					<div class="h-2 w-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full"></div>
+					<h2 class="text-3xl font-bold tracking-tight">Try the Interactive Task</h2>
+				</div>
 				<ConnectDotsTask client:load />
 			</section>
 

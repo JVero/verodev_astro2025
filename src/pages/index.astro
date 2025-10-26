@@ -5,8 +5,9 @@ import Layout from '../layouts/Layout.astro';
 <Layout>
 	<main class="max-w-5xl mx-auto px-6 py-12 relative">
 		<!-- About Section -->
-		<section class="mb-16 bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-sm">
-			<h1 class="text-5xl font-bold mb-6 text-gray-900">Joe Vero</h1>
+		<section class="mb-16 bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20 animate-fade-in">
+			<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 rounded-t-xl"></div>
+			<h1 class="text-6xl font-bold mb-6 text-gray-900 tracking-tight">Joe Vero</h1>
 			<p class="text-xl text-gray-600 leading-relaxed mb-6">
 				I am a PhD student in the Department of Psychology at Rutgers University. My research interests are in the area of motor control and human movement. I primarily use consumer-grade sensors to study human movement and motor control.
 			</p>
@@ -16,15 +17,19 @@ import Layout from '../layouts/Layout.astro';
 		</section>
 
 		<!-- Blog Posts Section -->
-		<section class="border-t border-gray-200 pt-12">
-			<h2 class="text-3xl font-bold mb-8 text-gray-900">Recent Posts</h2>
+		<section class="border-t border-gray-200 pt-12 animate-slide-up">
+			<h2 class="text-4xl font-bold mb-8 text-gray-900 tracking-tight">Recent Posts</h2>
 			<div class="space-y-6">
 				<!-- Blog Post Entry -->
-				<article class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow bg-white/60 backdrop-blur-sm">
+				<article class="group border border-gray-200 rounded-lg p-6 hover:shadow-xl transition-all duration-300 bg-white/60 backdrop-blur-sm hover:-translate-y-1 relative overflow-hidden">
+					<div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 					<a href="/blog/first-post" class="block">
-						<h3 class="text-2xl font-semibold mb-2 text-gray-900 hover:text-blue-600">
-							What I did for my master's thesis
-						</h3>
+						<div class="flex items-center gap-2 mb-2">
+							<div class="h-1.5 w-3 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+							<h3 class="text-2xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+								What I did for my master's thesis
+							</h3>
+						</div>
 						<p class="text-gray-600 mb-4">
 							A study of motor control using an interactive Connect the Dots task. 
 							Explore how humans execute precise movements under varying cognitive load, and what that means for characterizing neurological disorders.
@@ -38,7 +43,8 @@ import Layout from '../layouts/Layout.astro';
 				</article>
 
 				<!-- Placeholder for future posts -->
-				<article class="border border-gray-200 rounded-lg p-6 opacity-50 bg-white/60 backdrop-blur-sm">
+				<article class="group border border-gray-200 rounded-lg p-6 opacity-50 bg-white/60 backdrop-blur-sm relative overflow-hidden">
+					<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-data-orange to-data-orange/50"></div>
 					<h3 class="text-2xl font-semibold mb-2 text-gray-400">
 						Coming Soon: What I am doing for my PhD thesis!
 					</h3>
