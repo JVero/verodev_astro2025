@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import DotGridBackground from '../components/DotGridBackground.jsx';
 ---
 
 <!doctype html>
@@ -11,26 +12,30 @@ import '../styles/global.css';
 		<meta name="generator" content={Astro.generator} />
 		<title>vero.dev - Explaining my research and data analysis</title>
 	</head>
-	<body class="bg-gray-50">
-		<header class="border-b border-gray-200 bg-white">
-			<nav class="max-w-7xl mx-auto px-6 py-4">
-				<div class="flex items-center justify-between">
-					<a href="/" class="text-2xl font-bold text-gray-900 hover:text-gray-700">
-						vero.dev
-					</a>
-					<div class="flex gap-6">
-						<a href="/" class="text-gray-600 hover:text-gray-900">Home</a>
-						<a href="/blog/first-post" class="text-gray-600 hover:text-gray-900">Blog</a>
+	<body class="relative">
+		<DotGridBackground client:load />
+		
+		<div class="relative z-10">
+			<header class="border-b border-gray-200 bg-white/80 backdrop-blur-sm">
+				<nav class="max-w-7xl mx-auto px-6 py-4">
+					<div class="flex items-center justify-between">
+						<a href="/" class="text-2xl font-bold text-gray-900 hover:text-gray-700">
+							vero.dev
+						</a>
+						<div class="flex gap-6">
+							<a href="/" class="text-gray-600 hover:text-gray-900">Home</a>
+							<a href="/blog/first-post" class="text-gray-600 hover:text-gray-900">Blog</a>
+						</div>
 					</div>
+				</nav>
+			</header>
+			<slot />
+			<footer class="border-t border-gray-200 bg-white/80 backdrop-blur-sm mt-12">
+				<div class="max-w-7xl mx-auto px-6 py-6 text-center text-gray-600">
+					<p>© 2025 Joe Vero All rights reserved.</p>
 				</div>
-			</nav>
-		</header>
-		<slot />
-		<footer class="border-t border-gray-200 bg-white mt-12">
-			<div class="max-w-7xl mx-auto px-6 py-6 text-center text-gray-600">
-				<p>© 2025 Joe Vero All rights reserved.</p>
-			</div>
-		</footer>
+			</footer>
+		</div>
 	</body>
 </html>
 

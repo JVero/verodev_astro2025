@@ -3,9 +3,9 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<main class="max-w-5xl mx-auto px-6 py-12">
+	<main class="max-w-5xl mx-auto px-6 py-12 relative">
 		<!-- About Section -->
-		<section class="mb-16">
+		<section class="mb-16 bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-sm">
 			<h1 class="text-5xl font-bold mb-6 text-gray-900">Joe Vero</h1>
 			<p class="text-xl text-gray-600 leading-relaxed mb-6">
 				I am a PhD student in the Department of Psychology at Rutgers University. My research interests are in the area of motor control and human movement. I primarily use consumer-grade sensors to study human movement and motor control.
@@ -20,7 +20,7 @@ import Layout from '../layouts/Layout.astro';
 			<h2 class="text-3xl font-bold mb-8 text-gray-900">Recent Posts</h2>
 			<div class="space-y-6">
 				<!-- Blog Post Entry -->
-				<article class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+				<article class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow bg-white/60 backdrop-blur-sm">
 					<a href="/blog/first-post" class="block">
 						<h3 class="text-2xl font-semibold mb-2 text-gray-900 hover:text-blue-600">
 							What I did for my master's thesis
@@ -38,7 +38,7 @@ import Layout from '../layouts/Layout.astro';
 				</article>
 
 				<!-- Placeholder for future posts -->
-				<article class="border border-gray-200 rounded-lg p-6 opacity-50">
+				<article class="border border-gray-200 rounded-lg p-6 opacity-50 bg-white/60 backdrop-blur-sm">
 					<h3 class="text-2xl font-semibold mb-2 text-gray-400">
 						Coming Soon: What I am doing for my PhD thesis!
 					</h3>
