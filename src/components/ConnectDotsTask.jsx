@@ -16,17 +16,18 @@ const ConnectDotsTask = () => {
   const CANVAS_HEIGHT = 600;
   const DOT_RADIUS = 25;
   const NUM_TARGETS = 12;
+  const MIN_POINT_DISTANCE = 5; // Minimum distance (in pixels) between consecutive points
+  const BORDER_PADDING = DOT_RADIUS + 50; // Extra padding around canvas borders
 
   // Generate random positions for targets
   const generateTargets = (diff) => {
     const newTargets = [];
-    const padding = DOT_RADIUS + 20;
     
     for (let i = 0; i < NUM_TARGETS; i++) {
       let x, y, tooClose;
       do {
-        x = padding + Math.random() * (CANVAS_WIDTH - 2 * padding);
-        y = padding + Math.random() * (CANVAS_HEIGHT - 2 * padding);
+        x = BORDER_PADDING + Math.random() * (CANVAS_WIDTH - 2 * BORDER_PADDING);
+        y = BORDER_PADDING + Math.random() * (CANVAS_HEIGHT - 2 * BORDER_PADDING);
         
         // Check if too close to existing targets
         tooClose = newTargets.some(target => {
@@ -69,6 +70,18 @@ const ConnectDotsTask = () => {
     // Draw background
     ctx.fillStyle = '#f8f9fa';
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    
+    // Draw boundary indicator to show safe drawing area
+    ctx.strokeStyle = '#e5e7eb';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([5, 5]);
+    ctx.strokeRect(
+      BORDER_PADDING, 
+      BORDER_PADDING, 
+      CANVAS_WIDTH - 2 * BORDER_PADDING, 
+      CANVAS_HEIGHT - 2 * BORDER_PADDING
+    );
+    ctx.setLineDash([]); // Reset line dash
     
     // Draw completed trajectory lines
     trajectoryData.forEach((stroke, idx) => {
@@ -162,11 +175,25 @@ const ConnectDotsTask = () => {
       if (startTimeRef.current === null) {
         startTimeRef.current = performance.now();
       }
+      
+      // Mark the clicked target as complete immediately
+      // This means we're starting to draw TO the next target
+      const fromTargetIndex = currentIndex;
+      setCurrentIndex(prev => {
+        // If this is the last target, the task will complete
+        if (prev === targets.length - 1) {
+          setCompleted(true);
+          setIsDrawing(false);
+          return prev;
+        }
+        return prev + 1;
+      });
+      
       setCurrentStroke([{
         x: pos.x,
         y: pos.y,
         timestamp: performance.now() - startTimeRef.current,
-        targetIndex: currentIndex
+        targetIndex: fromTargetIndex
       }]);
     }
   };
@@ -175,6 +202,22 @@ const ConnectDotsTask = () => {
     if (!isDrawing) return;
     
     const pos = getMousePos(e);
+    
+    // Check minimum distance from previous point to improve data quality
+    // Only add the point if it's far enough from the last point
+    if (currentStroke.length > 0) {
+      const lastPoint = currentStroke[currentStroke.length - 1];
+      const dist = Math.sqrt(
+        (pos.x - lastPoint.x) ** 2 + (pos.y - lastPoint.y) ** 2
+      );
+      if (dist < MIN_POINT_DISTANCE) {
+        return; // Skip this point, it's too close to the previous one
+      }
+    }
+    
+    // Get the target we're drawing TO (which is currentIndex)
+    const targetWeAreDrawingTo = targets[currentIndex];
+    
     setCurrentStroke(prev => [...prev, {
       x: pos.x,
       y: pos.y,
@@ -182,12 +225,11 @@ const ConnectDotsTask = () => {
       targetIndex: currentIndex
     }]);
     
-    // Check if we've entered the current target while dragging
-    const currentTarget = targets[currentIndex];
-    if (isInsideTarget(pos, currentTarget)) {
+    // Check if we've entered the target we're aiming for
+    if (isInsideTarget(pos, targetWeAreDrawingTo)) {
       // We're inside the target - check if this is different from last position
       const lastStroke = currentStroke[currentStroke.length - 1];
-      if (!lastStroke || !isInsideTarget(lastStroke, currentTarget)) {
+      if (!lastStroke || !isInsideTarget(lastStroke, targetWeAreDrawingTo)) {
         // Just entered the target, move to next
         const finalStroke = [...currentStroke, {
           x: pos.x,
@@ -199,6 +241,7 @@ const ConnectDotsTask = () => {
         setTrajectoryData(prev => [...prev, finalStroke]);
         setCurrentStroke([]);
         
+        // Check if we just reached the last target
         if (currentIndex === targets.length - 1) {
           // Task completed!
           setCompleted(true);
