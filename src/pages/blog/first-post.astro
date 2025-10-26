@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ConnectDotsTask from '../../components/ConnectDotsTask.jsx';
+import AutoCitations from '../../components/AutoCitations.astro';
 ---
 
 <Layout>
@@ -15,7 +16,7 @@ import ConnectDotsTask from '../../components/ConnectDotsTask.jsx';
 			<div class="mb-8">
 				<p class="text-xl text-gray-700 leading-relaxed">
 					Motor control and human movement patterns have long fascinated researchers in neuroscience, 
-					psychology, and human-computer interaction. Understanding how we execute precise movements 
+					psychology, and human-computer interaction [https://example.com/motor-control]. Understanding how we execute precise movements 
 					provides insights into cognitive processes, motor learning, and the planning-execution loop.
 				</p>
 
@@ -23,7 +24,7 @@ import ConnectDotsTask from '../../components/ConnectDotsTask.jsx';
 					In this interactive experiment, you'll complete a "Connect the Dots" task that challenges 
 					you to draw precise trajectories between numbered targets. The task captures detailed 
 					trajectory data—every position, timestamp, and movement segment—providing rich data for 
-					analyzing human motor control.
+					analyzing human motor control [https://doi.org/10.1016/j.example-trajectory-analysis].
 				</p>
 			</div>
 
@@ -38,7 +39,7 @@ import ConnectDotsTask from '../../components/ConnectDotsTask.jsx';
 					By analyzing the trajectory data collected from tasks like this, we can investigate:
 				</p>
 				<ul>
-					<li>Movement planning and execution strategies</li>
+					<li>Movement planning and execution strategies [https://example.com/movement-planning]</li>
 					<li>The relationship between movement time and complexity</li>
 					<li>Variability in human motor control</li>
 					<li>How difficulty (number sequencing vs. alternating sequences) affects performance</li>
@@ -51,6 +52,8 @@ import ConnectDotsTask from '../../components/ConnectDotsTask.jsx';
 					these patterns reveal about human movement.
 				</p>
 			</div>
+
+			<AutoCitations />
 		</article>
 	</main>
 </Layout>

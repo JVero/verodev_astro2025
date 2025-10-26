@@ -1,0 +1,81 @@
+---
+---
+<div id="citations-container"></div>
+
+<script is:inline>
+	// Client-side script to process citations in rendered HTML
+	document.addEventListener('DOMContentLoaded', () => {
+		const article = document.querySelector('article');
+		if (!article) return;
+		
+		const content = article.innerHTML;
+		const citationRegex = /\[(https?:\/\/[^\]]+)\]/g;
+		const matches = [...content.matchAll(citationRegex)];
+		
+		// Extract unique URLs (preserving order)
+		const seenUrls = new Set();
+		const citations = [];
+		matches.forEach(match => {
+			const url = match[1];
+			if (!seenUrls.has(url)) {
+				seenUrls.add(url);
+				citations.push(url);
+			}
+		});
+		
+		// Create a mapping of URLs to their citation numbers
+		const urlToNumber = new Map();
+		citations.forEach((url, index) => {
+			urlToNumber.set(url, index + 1);
+		});
+		
+		// Replace citations with numbered references
+		matches.reverse().forEach(match => {
+			const url = match[1];
+			const fullMatch = match[0];
+			const number = urlToNumber.get(url);
+			article.innerHTML = article.innerHTML.replace(
+				fullMatch,
+				`<sup><a href="#ref-${number}" id="cite-${number}" class="text-blue-600 hover:underline no-underline">[${number}]</a></sup>`
+			);
+		});
+		
+		// Generate references section
+		if (citations.length > 0) {
+			const container = document.getElementById('citations-container');
+			if (container) {
+				container.innerHTML = `
+					<section class="mt-12 pt-8 border-t border-gray-300">
+						<h2 class="text-2xl font-bold mb-4">References</h2>
+						<ol class="space-y-3 list-decimal list-inside">
+							${citations.map((url, index) => `
+								<li id="ref-${index + 1}" class="ml-4 break-words">
+									<a 
+										href="${url}" 
+										target="_blank" 
+										rel="noopener noreferrer"
+										class="text-blue-600 hover:underline"
+									>
+										${url}
+									</a>
+								</li>
+							`).join('')}
+						</ol>
+					</section>
+				`;
+			}
+		}
+	});
+</script>
+
+<style>
+	sup {
+		vertical-align: super;
+		font-size: 0.75em;
+		line-height: 0;
+	}
+	
+	#citations-container ol {
+		word-break: break-all;
+	}
+</style>
