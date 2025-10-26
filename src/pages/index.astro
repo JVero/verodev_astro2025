@@ -1,13 +1,60 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import ConnectDotsTask from '../components/ConnectDotsTask.jsx';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
-	<ConnectDotsTask client:load />
+	<main class="max-w-5xl mx-auto px-6 py-12">
+		<!-- About Section -->
+		<section class="mb-16">
+			<h1 class="text-5xl font-bold mb-6 text-gray-900">Your Name</h1>
+			<p class="text-xl text-gray-600 leading-relaxed mb-6">
+				[Add a brief description about yourself here. What do you do? What are you interested in?]
+			</p>
+			<p class="text-gray-700 leading-relaxed">
+				[Expand on your background, current work, research interests, or anything else you'd like 
+				visitors to know about you.]
+			</p>
+		</section>
+
+		<!-- Blog Posts Section -->
+		<section class="border-t border-gray-200 pt-12">
+			<h2 class="text-3xl font-bold mb-8 text-gray-900">Recent Posts</h2>
+			<div class="space-y-6">
+				<!-- Blog Post Entry -->
+				<article class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+					<a href="/blog/first-post" class="block">
+						<h3 class="text-2xl font-semibold mb-2 text-gray-900 hover:text-blue-600">
+							Understanding Motor Control Through Trajectory Analysis
+						</h3>
+						<p class="text-gray-600 mb-4">
+							A study of motor control using an interactive Connect the Dots task. 
+							Explore how humans execute precise movements and what trajectory 
+							data can teach us about motor planning and execution.
+						</p>
+						<div class="flex items-center gap-4 text-sm text-gray-500">
+							<time datetime="2025-01-XX">January 2025</time>
+							<span>•</span>
+							<span>Interactive</span>
+						</div>
+					</a>
+				</article>
+
+				<!-- Placeholder for future posts -->
+				<article class="border border-gray-200 rounded-lg p-6 opacity-50">
+					<h3 class="text-2xl font-semibold mb-2 text-gray-400">
+						Coming Soon: [Your Next Post Title]
+					</h3>
+					<p class="text-gray-400 mb-4">
+						[Description of your upcoming blog post]
+					</p>
+				</article>
+			</div>
+		</section>
+	</main>
 </Layout>
+
+<style>
+	main {
+		min-height: 100vh;
+	}
+</style>

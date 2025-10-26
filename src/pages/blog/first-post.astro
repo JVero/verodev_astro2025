@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ConnectDotsTask from '../../components/ConnectDotsTask.jsx';
+---
+
+<Layout>
+	<main class="max-w-4xl mx-auto px-6 py-12">
+		<article class="prose prose-lg max-w-none">
+			<header class="mb-8 pb-6 border-b border-gray-200">
+				<h1 class="text-4xl font-bold mb-4">Understanding Motor Control Through Trajectory Analysis</h1>
+				<p class="text-gray-600 text-lg">A study of motor control using the Connect the Dots task</p>
+				<time class="text-sm text-gray-500" datetime="2025-01-XX">January 2025</time>
+			</header>
+
+			<div class="mb-8">
+				<p class="text-xl text-gray-700 leading-relaxed">
+					Motor control and human movement patterns have long fascinated researchers in neuroscience, 
+					psychology, and human-computer interaction. Understanding how we execute precise movements 
+					provides insights into cognitive processes, motor learning, and the planning-execution loop.
+				</p>
+
+				<p class="mt-4 text-gray-700 leading-relaxed">
+					In this interactive experiment, you'll complete a "Connect the Dots" task that challenges 
+					you to draw precise trajectories between numbered targets. The task captures detailed 
+					trajectory data—every position, timestamp, and movement segment—providing rich data for 
+					analyzing human motor control.
+				</p>
+			</div>
+
+			<section class="my-12">
+				<h2 class="text-2xl font-bold mb-4">Try the Interactive Task</h2>
+				<ConnectDotsTask client:load />
+			</section>
+
+			<div class="mt-12 prose prose-gray">
+				<h2>What We're Studying</h2>
+				<p>
+					By analyzing the trajectory data collected from tasks like this, we can investigate:
+				</p>
+				<ul>
+					<li>Movement planning and execution strategies</li>
+					<li>The relationship between movement time and complexity</li>
+					<li>Variability in human motor control</li>
+					<li>How difficulty (number sequencing vs. alternating sequences) affects performance</li>
+				</ul>
+
+				<h2>Next Steps</h2>
+				<p>
+					After completing the task, you can download your trajectory data for analysis. 
+					Future posts will explore different aspects of motor control research and what 
+					these patterns reveal about human movement.
+				</p>
+			</div>
+		</article>
+	</main>
+</Layout>
+
+<style>
+	main {
+		min-height: 100vh;
+	}
+</style>
+
