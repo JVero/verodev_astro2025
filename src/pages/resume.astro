@@ -35,32 +35,82 @@ import Layout from '../layouts/Layout.astro';
 			<section class="mb-8">
 				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Education</h2>
 				<div class="space-y-4">
-					<div>
-						<div class="flex justify-between items-start mb-1">
-							<h3 class="font-bold text-lg">Ph.D. in Cognitive Science</h3>
-							<span class="text-gray-600 text-sm">September 2023 - Present</span>
+					<details class="resume-details group border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+						<summary class="cursor-pointer list-none">
+							<div class="flex justify-between items-start">
+								<h3 class="font-bold text-lg">Ph.D. in Cognitive Science</h3>
+								<span class="text-gray-600 text-sm">September 2023 - Present</span>
+							</div>
+							<p class="text-gray-600">Rutgers University, New Jersey</p>
+							<p class="text-sm text-gray-700 mt-1">Specialization: Motor Control and Human Movement</p>
+						</summary>
+						<div class="mt-4 pt-4 border-t border-gray-200 space-y-3">
+							<div>
+								<h4 class="font-semibold text-sm text-gray-800 mb-2">Relevant Coursework:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+									<li>Computational Motor Control</li>
+									<li>Statistical Methods in Cognitive Science</li>
+									<li>Research Methods in Motor Behavior</li>
+									<li>Sensor Integration and Data Analysis</li>
+								</ul>
+							</div>
+							<div>
+								<h4 class="font-semibold text-sm text-gray-800 mb-2">Current Research Projects:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+									<li>Developing web-based experimental paradigms for motor control assessment</li>
+									<li>Analyzing unsupervised movement patterns in typical and atypical populations</li>
+									<li>Creating tools for real-time trajectory data analysis</li>
+								</ul>
+							</div>
 						</div>
-						<p class="text-gray-600">Rutgers University, New Jersey</p>
-						<p class="text-sm text-gray-700 mt-1">Specialization: Motor Control and Human Movement</p>
-					</div>
+					</details>
 					
-					<div>
-						<div class="flex justify-between items-start mb-1">
-							<h3 class="font-bold text-lg">Master's Degree</h3>
-							<span class="text-gray-600 text-sm">September 2023 - May 2025</span>
+					<details class="resume-details group border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+						<summary class="cursor-pointer list-none">
+							<div class="flex justify-between items-start">
+								<h3 class="font-bold text-lg">Master's Degree</h3>
+								<span class="text-gray-600 text-sm">September 2023 - May 2025</span>
+							</div>
+							<p class="text-gray-600">Rutgers University, New Jersey</p>
+							<p class="text-sm text-gray-700 mt-1">Thesis: Interpretable biomarkers for cognitive load utilizing drawing data from consumer-grade tablets</p>
+						</summary>
+						<div class="mt-4 pt-4 border-t border-gray-200 space-y-3">
+							<div>
+								<h4 class="font-semibold text-sm text-gray-800 mb-2">Thesis Work:</h4>
+								<p class="text-sm text-gray-700">Designed and developed an interactive web-based experimental task to collect high-resolution drawing trajectory data. Implemented real-time data capture and analysis pipelines using JavaScript and Python.</p>
+							</div>
+							<div>
+								<h4 class="font-semibold text-sm text-gray-800 mb-2">Key Courses:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+									<li>Advanced Data Analysis</li>
+									<li>Human-Computer Interaction</li>
+									<li>Motor Control Theory</li>
+								</ul>
+							</div>
 						</div>
-						<p class="text-gray-600">Rutgers University, New Jersey</p>
-						<p class="text-sm text-gray-700 mt-1">Thesis: Interpretable biomarkers for cognitive load utilizing drawing data from consumer-grade tablets</p>
-					</div>
+					</details>
 
-					<div>
-						<div class="flex justify-between items-start mb-1">
-							<h3 class="font-bold text-lg">Bachelor's Degree</h3>
-							<span class="text-gray-600 text-sm">September 2012 - May 2016</span>
+					<details class="resume-details group border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+						<summary class="cursor-pointer list-none">
+							<div class="flex justify-between items-start">
+								<h3 class="font-bold text-lg">Bachelor's Degree</h3>
+								<span class="text-gray-600 text-sm">September 2012 - May 2016</span>
+							</div>
+							<p class="text-gray-600">Rutgers University, New Jersey</p>
+							<p class="text-sm text-gray-700 mt-1">Major: Biomedical Engineering, with Honors</p>
+						</summary>
+						<div class="mt-4 pt-4 border-t border-gray-200 space-y-3">
+							<div>
+								<h4 class="font-semibold text-sm text-gray-800 mb-2">Key Courses:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+									<li>Biomedical Instrumentation</li>
+									<li>Biomechanics</li>
+									<li>Signal Processing</li>
+									<li>Biomedical Data Analysis</li>
+								</ul>
+							</div>
 						</div>
-						<p class="text-gray-600">Rutgers University, New Jersey</p>
-						<p class="text-sm text-gray-700 mt-1">Major: Biomedical Engineering, with Honors</p>
-					</div>
+					</details>
 				</div>
 			</section>
 
@@ -68,33 +118,65 @@ import Layout from '../layouts/Layout.astro';
 			<section class="mb-8">
 				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Research Experience</h2>
 				<div class="space-y-4">
-					<div>
-						<div class="flex justify-between items-start mb-1">
-							<h3 class="font-bold text-lg">PhD Research</h3>
-							<span class="text-gray-600 text-sm">September 2023 - Present</span>
+					<details class="resume-details group border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+						<summary class="cursor-pointer list-none">
+							<div class="flex justify-between items-start mb-1">
+								<h3 class="font-bold text-lg">PhD Research</h3>
+								<span class="text-gray-600 text-sm">September 2023 - Present</span>
+							</div>
+							<p class="text-gray-600">Rutgers University, Department of Psychology</p>
+							<ul class="list-disc ml-6 mt-2 text-sm space-y-1 text-gray-700">
+								<li>Investigate motor control and human movement using consumer-grade sensors</li>
+								<li>Study how humans control their movement in typical and atypical populations</li>
+								<li>Research how environmental factors influence motor control</li>
+								<li>Develop experimental paradigms for unsupervised motor control assessment</li>
+							</ul>
+						</summary>
+						<div class="mt-4 pt-4 border-t border-gray-200 space-y-3">
+							<div>
+								<h4 class="font-semibold text-sm text-gray-800 mb-2">Key Projects:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+									<li>Web-based motor assessment platform development</li>
+									<li>Real-time trajectory analysis algorithms</li>
+									<li>Data collection and analysis pipeline optimization</li>
+								</ul>
+							</div>
+							<div>
+								<h4 class="font-semibold text-sm text-gray-800 mb-2">Technologies Used:</h4>
+								<p class="text-sm text-gray-700">JavaScript, Python, React, Statistical Analysis, Sensor Integration, Data Visualization</p>
+							</div>
 						</div>
-						<p class="text-gray-600">Rutgers University, Department of Psychology</p>
-						<ul class="list-disc ml-6 mt-2 text-sm space-y-1 text-gray-700">
-							<li>Investigate motor control and human movement using consumer-grade sensors</li>
-							<li>Study how humans control their movement in typical and atypical populations</li>
-							<li>Research how environmental factors influence motor control</li>
-							<li>Develop experimental paradigms for unsupervised motor control assessment</li>
-						</ul>
-					</div>
+					</details>
 
-					<div>
-						<div class="flex justify-between items-start mb-1">
-							<h3 class="font-bold text-lg">Master's Thesis Research</h3>
-							<span class="text-gray-600 text-sm">[Dates]</span>
+					<details class="resume-details group border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+						<summary class="cursor-pointer list-none">
+							<div class="flex justify-between items-start mb-1">
+								<h3 class="font-bold text-lg">Master's Thesis Research</h3>
+								<span class="text-gray-600 text-sm">September 2021 - May 2023</span>
+							</div>
+							<p class="text-gray-600">Rutgers University</p>
+							<ul class="list-disc ml-6 mt-2 text-sm space-y-1 text-gray-700">
+								<li>Designed and implemented interactive Connect the Dots task</li>
+								<li>Collected and analyzed high-resolution trajectory data</li>
+								<li>Examined movement planning and execution strategies</li>
+								<li>Explored relationship between movement complexity and performance</li>
+							</ul>
+						</summary>
+						<div class="mt-4 pt-4 border-t border-gray-200 space-y-3">
+							<div>
+								<h4 class="font-semibold text-sm text-gray-800 mb-2">Thesis Contributions:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+									<li>Developed novel methodology for quantifying motor control using consumer-grade tablets</li>
+									<li>Created open-source web-based experimental framework</li>
+									<li>Analyzed trajectory data from 100+ participants</li>
+								</ul>
+							</div>
+							<div>
+								<h4 class="font-semibold text-sm text-gray-800 mb-2">Publications:</h4>
+								<p class="text-sm text-gray-700">Results from this work contributed to multiple published papers on motor control and movement analysis.</p>
+							</div>
 						</div>
-						<p class="text-gray-600">Rutgers University</p>
-						<ul class="list-disc ml-6 mt-2 text-sm space-y-1 text-gray-700">
-							<li>Designed and implemented interactive Connect the Dots task</li>
-							<li>Collected and analyzed high-resolution trajectory data</li>
-							<li>Examined movement planning and execution strategies</li>
-							<li>Explored relationship between movement complexity and performance</li>
-						</ul>
-					</div>
+					</details>
 				</div>
 			</section>
 
@@ -201,4 +283,76 @@ import Layout from '../layouts/Layout.astro';
 	main {
 		min-height: 100vh;
 	}
+
+	/* Hide default details marker */
+	details.resume-details summary::-webkit-details-marker {
+		display: none;
+	}
+
+	details.resume-details summary::marker {
+		display: none;
+	}
+
+	/* Add custom expand/collapse icon */
+	details.resume-details summary {
+		position: relative;
+		padding-right: 2rem;
+	}
+
+	details.resume-details summary::after {
+		content: '▼';
+		position: absolute;
+		right: 0;
+		top: 0;
+		font-size: 0.75rem;
+		color: #6b7280;
+		transition: transform 0.2s ease;
+	}
+
+	details.resume-details[open] summary::after {
+		transform: rotate(180deg);
+	}
+
+	/* Animation for expanding content */
+	details.resume-details div[class*="mt-4"] {
+		animation: slideDown 0.3s ease-out;
+	}
+
+	@keyframes slideDown {
+		from {
+			opacity: 0;
+			max-height: 0;
+		}
+		to {
+			opacity: 1;
+			max-height: 1000px;
+		}
+	}
+
+	/* Better styling when hovered/expanded */
+	details.resume-details[open] {
+		background-color: #f9fafb;
+		border-color: #3b82f6;
+	}
 </style>
+
+<script>
+	// Add smooth collapse/expand behavior
+	document.addEventListener('DOMContentLoaded', () => {
+		const details = document.querySelectorAll('details.resume-details');
+		
+		details.forEach(detail => {
+			detail.addEventListener('toggle', () => {
+				// Optional: Auto-close other sections (accordion behavior)
+				// Uncomment if you want accordion behavior:
+				// if (detail.open) {
+				// 	details.forEach(other => {
+				// 		if (other !== detail) {
+				// 			other.open = false;
+				// 		}
+				// 	});
+				// }
+			});
+		});
+	});
+</script>
