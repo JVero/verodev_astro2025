@@ -1,0 +1,202 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<main class="max-w-4xl mx-auto px-6 py-12 relative">
+		<div class="mb-8 animate-fade-in">
+			<h1 class="text-5xl font-bold tracking-tight mb-6">Resume</h1>
+		</div>
+
+		<article class="prose prose-lg max-w-none bg-white rounded-xl p-8 shadow-lg border border-white/20 animate-fade-in relative overflow-hidden">
+			<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400"></div>
+			
+			<!-- Header -->
+			<header class="mb-8 pb-6 border-b-2 border-gray-200">
+				<h1 class="text-4xl font-bold mb-2">Joe Vero</h1>
+				<p class="text-gray-600">PhD Student in Psychology</p>
+				<div class="mt-4 text-sm text-gray-500">
+					<p>Rutgers University</p>
+					<p class="mt-1">Motor Control & Human Movement Research</p>
+				</div>
+			</header>
+
+			<!-- Contact Information -->
+			<section class="mb-8">
+				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Contact</h2>
+				<div class="text-sm space-y-1 text-gray-700">
+					<p>Email: joseph.vero@rutgers.edu</p>
+					<p>Website: <a href="https://vero.dev" class="text-blue-600 hover:underline">vero.dev (this website)</a></p>
+					<p>Location: New Jersey, USA</p>
+				</div>
+			</section>
+
+			<!-- Education -->
+			<section class="mb-8">
+				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Education</h2>
+				<div class="space-y-4">
+					<div>
+						<div class="flex justify-between items-start mb-1">
+							<h3 class="font-bold text-lg">Ph.D. in Cognitive Science</h3>
+							<span class="text-gray-600 text-sm">September 2023 - Present</span>
+						</div>
+						<p class="text-gray-600">Rutgers University, New Jersey</p>
+						<p class="text-sm text-gray-700 mt-1">Specialization: Motor Control and Human Movement</p>
+					</div>
+					
+					<div>
+						<div class="flex justify-between items-start mb-1">
+							<h3 class="font-bold text-lg">Master's Degree</h3>
+							<span class="text-gray-600 text-sm">September 2023 - May 2025</span>
+						</div>
+						<p class="text-gray-600">Rutgers University, New Jersey</p>
+						<p class="text-sm text-gray-700 mt-1">Thesis: Interpretable biomarkers for cognitive load utilizing drawing data from consumer-grade tablets</p>
+					</div>
+
+					<div>
+						<div class="flex justify-between items-start mb-1">
+							<h3 class="font-bold text-lg">Bachelor's Degree</h3>
+							<span class="text-gray-600 text-sm">September 2012 - May 2016</span>
+						</div>
+						<p class="text-gray-600">Rutgers University, New Jersey</p>
+						<p class="text-sm text-gray-700 mt-1">Major: Biomedical Engineering, with Honors</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Research Experience -->
+			<section class="mb-8">
+				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Research Experience</h2>
+				<div class="space-y-4">
+					<div>
+						<div class="flex justify-between items-start mb-1">
+							<h3 class="font-bold text-lg">PhD Research</h3>
+							<span class="text-gray-600 text-sm">September 2023 - Present</span>
+						</div>
+						<p class="text-gray-600">Rutgers University, Department of Psychology</p>
+						<ul class="list-disc ml-6 mt-2 text-sm space-y-1 text-gray-700">
+							<li>Investigate motor control and human movement using consumer-grade sensors</li>
+							<li>Study how humans control their movement in typical and atypical populations</li>
+							<li>Research how environmental factors influence motor control</li>
+							<li>Develop experimental paradigms for unsupervised motor control assessment</li>
+						</ul>
+					</div>
+
+					<div>
+						<div class="flex justify-between items-start mb-1">
+							<h3 class="font-bold text-lg">Master's Thesis Research</h3>
+							<span class="text-gray-600 text-sm">[Dates]</span>
+						</div>
+						<p class="text-gray-600">Rutgers University</p>
+						<ul class="list-disc ml-6 mt-2 text-sm space-y-1 text-gray-700">
+							<li>Designed and implemented interactive Connect the Dots task</li>
+							<li>Collected and analyzed high-resolution trajectory data</li>
+							<li>Examined movement planning and execution strategies</li>
+							<li>Explored relationship between movement complexity and performance</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- Skills -->
+			<section class="mb-8">
+				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Technical Skills</h2>
+				<div class="grid grid-cols-2 gap-4">
+					<div>
+						<h3 class="font-semibold mb-2">Programming & Data</h3>
+						<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+							<li>Python</li>
+							<li>R</li>
+                            <li>Matlab</li>
+                            <li>Swift</li>
+                            <li>iOS Development</li>
+                            <li>C++</li>
+							<li>Data Analysis</li>
+							<li>Statistical Modeling</li>
+                            <li>Data Science</li>
+						</ul>
+					</div>
+					<div>
+						<h3 class="font-semibold mb-2">Research Methods</h3>
+						<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+							<li>Sensor Integration</li>
+							<li>Trajectory Analysis</li>
+							<li>Experimental Design</li>
+							<li>Motor Control Assessment</li>
+                            <li>Experimental Design</li>
+                            <li>Data Collection</li>
+                            <li>Signal Processing</li>
+                            <li>Machine Learning</li>
+                            <li>Deep Learning</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- Publications & Presentations -->
+			<section class="mb-8">
+				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Publications</h2>
+				<div class="space-y-4 text-sm">
+					<div class="text-gray-700">
+						<p>Bermperidis, T., <strong>Vero, J.</strong>, & Torres, E. B. (2025). On the importance of behavioral nuances: Amplifying non-obvious motor noise under true empirical considerations may lead to briefer assays and faster classification processes. <em>arXiv preprint arXiv:2508.12742</em>.</p>
+					</div>
+					
+					<div class="text-gray-700">
+						<p>Torres, E. B., <strong>Vero, J.</strong>, Drain, N., Rai, R., & Bermperidis, T. (2025). Hidden social and emotional competencies in autism spectrum disorders captured through the digital lens. <em>Frontiers in Psychiatry, 16</em>, 1559202.</p>
+					</div>
+					
+					<div class="text-gray-700">
+						<p>Torres, E. B., Varkey, H., <strong>Vero, J.</strong>, London, E., Phan, H., Kittler, P., Gordon, A., ... (2023). Sensing echoes: temporal misalignment in auditory brainstem responses as the earliest marker of neurodevelopmental derailment. <em>PNAS Nexus, 2</em>(2), pgac315.</p>
+					</div>
+					
+					<div class="text-gray-700">
+						<p>Torres, E. B., Bermperidis, T., Varkey, H., <strong>Vero, J.</strong>, London, E., Phan, H., Kittler, P., ... (2022). Sensing Echoes: Temporal misalignment as the Earliest Marker of Neurodevelopmental Derail. <em>SSRN</em> 4049202.</p>
+					</div>
+					
+					<div class="text-gray-700">
+						<p>Ryu, J., <strong>Vero, J.</strong>, Dobkin, R. D., & Torres, E. B. (2019). Dynamic digital biomarkers of motor and cognitive function in Parkinson's disease. <em>Journal of Visualized Experiments, 149</em>(10.3791), 59827.</p>
+					</div>
+					
+					<div class="text-gray-700">
+						<p>Torres, E. B., <strong>Vero, J.</strong>, & Rai, R. (2018). Statistical platform for individualized behavioral analyses using biophysical micro-movement spikes. <em>Sensors, 18</em>(4), 1025.</p>
+					</div>
+					
+					<div class="text-gray-700">
+						<p>Caballero, C., Mistry, S., <strong>Vero, J.</strong>, & Torres, E. B. (2018). Characterization of noise signatures of involuntary head motion in the autism brain imaging data exchange repository. <em>Frontiers in Integrative Neuroscience, 12</em>, 7.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Research Interests -->
+			<section class="mb-8">
+				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Research Interests</h2>
+				<ul class="list-disc ml-6 space-y-2 text-sm text-gray-700">
+					<li>Motor control and human movement</li>
+					<li>Consumer-grade sensor technology for movement analysis</li>
+					<li>Planning-execution loop in motor behavior</li>
+					<li>Typical and atypical movement patterns</li>
+					<li>Environmental influences on motor control</li>
+					<li>Human-computer interaction in motor assessment</li>
+				</ul>
+			</section>
+
+			<!-- Additional Information -->
+			<section>
+				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Additional Information</h2>
+				<ul class="list-disc ml-6 space-y-2 text-sm text-gray-700">
+					<li>Experience with web-based experimental paradigms</li>
+					<li>Proficient in trajectory data analysis and visualization</li>
+					<li>Strong background in statistical analysis</li>
+					<!-- Add more relevant skills or experiences -->
+				</ul>
+			</section>
+
+		</article>
+	</main>
+</Layout>
+
+<style>
+	main {
+		min-height: 100vh;
+	}
+</style>
