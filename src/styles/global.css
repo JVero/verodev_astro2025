@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@config "../tailwind.config.mjs";
 
 * {
   box-sizing: border-box;
@@ -32,6 +35,49 @@ button, a, select, input, [onClick] {
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(120,110,100,0.06);
   border-color: #DDD9D2;
+}
+
+/* Prose typography for blog posts */
+.prose-vero {
+  --tw-prose-body: #5C5852;
+  --tw-prose-headings: #1A1816;
+  --tw-prose-links: #9C4430;
+  --tw-prose-bold: #1A1816;
+  --tw-prose-counters: #A8A39C;
+  --tw-prose-bullets: #A8A39C;
+  --tw-prose-hr: #EBE8E3;
+  --tw-prose-quotes: #5C5852;
+  --tw-prose-quote-borders: #9C4430;
+  --tw-prose-captions: #A8A39C;
+  --tw-prose-code: #1A1816;
+  --tw-prose-th-borders: #DDD9D2;
+  --tw-prose-td-borders: #EBE8E3;
+  line-height: 1.8;
+}
+
+.prose-vero :where(h2, h3, h4):not(:where([class~="not-prose"] *)) {
+  font-family: "Newsreader", ui-serif, Georgia, serif;
+  font-weight: 400;
+}
+
+.prose-vero :where(a):not(:where([class~="not-prose"] *)) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.prose-vero :where(a):not(:where([class~="not-prose"] *)):hover {
+  color: #7A3526;
+}
+
+/* First paragraph drop cap in blog posts */
+.prose-vero > :where(p:first-of-type):not(:where([class~="not-prose"] *))::first-letter {
+  float: left;
+  font-size: 3.2em;
+  line-height: 0.75;
+  font-family: "Newsreader", ui-serif, Georgia, serif;
+  font-weight: 400;
+  color: #9C4430;
+  padding: 4px 8px 0 0;
 }
 
 body {
