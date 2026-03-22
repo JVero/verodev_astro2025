@@ -7,33 +7,39 @@ import DotGridBackground from '../components/DotGridBackground.jsx';
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+		<meta name="theme-color" content="#9C4430" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet" />
 		<meta name="generator" content={Astro.generator} />
 		<title>vero.dev - Explaining my research and data analysis</title>
 	</head>
 	<body class="relative">
 		<DotGridBackground client:load />
-		
+
 		<div class="relative z-10">
-			<header class="border-b border-gray-200 bg-white/80 backdrop-blur-sm">
-				<nav class="max-w-7xl mx-auto px-6 py-4">
+			<header class="border-b border-vero-border bg-vero-bg">
+				<nav class="max-w-3xl mx-auto px-6 py-5">
 					<div class="flex items-center justify-between">
-						<a href="/" class="text-2xl font-bold hover:text-blue-600 transition-colors tracking-tight">
-							<span class="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">vero.dev</span>
+						<a href="/" class="text-2xl font-normal hover:opacity-80 transition-opacity tracking-tight font-serif text-vero-accent" style="letter-spacing: -0.015em;">
+							vero.dev
 						</a>
 					<div class="flex gap-6">
-						<a href="/" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
-						<a href="/blog/first-post" class="text-gray-600 hover:text-blue-600 transition-colors">Blog</a>
-						<a href="/resume" class="text-gray-600 hover:text-blue-600 transition-colors">Resume</a>
+						<a href="/" class="text-vero-text-mid hover:text-vero-accent transition-colors text-sm font-medium">Home</a>
+						<a href="/blog/first-post" class="text-vero-text-mid hover:text-vero-accent transition-colors text-sm font-medium">Blog</a>
+						<a href="/resume" class="text-vero-text-mid hover:text-vero-accent transition-colors text-sm font-medium">Resume</a>
 					</div>
 					</div>
 				</nav>
 			</header>
 			<slot />
-			<footer class="border-t border-gray-200 bg-white/80 backdrop-blur-sm mt-12">
-				<div class="max-w-7xl mx-auto px-6 py-6 text-center text-gray-600">
-					<p>© 2025 Joe Vero All rights reserved.</p>
+			<footer class="border-t border-vero-border bg-vero-bg mt-12">
+				<div class="max-w-3xl mx-auto px-6 py-6 text-center text-vero-text-muted text-sm">
+					<p>&copy; 2025 Joe Vero. All rights reserved.</p>
 				</div>
 			</footer>
 		</div>

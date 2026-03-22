@@ -21,13 +21,13 @@ const DotGridBackground = () => {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-    
+
     // Calculate dimensions
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
-    
+
     resize();
     window.addEventListener('resize', resize);
 
@@ -55,7 +55,7 @@ const DotGridBackground = () => {
     };
 
     dotsRef.current = generateDots();
-    
+
     // Track which dots are active
     dotsRef.current.forEach(dot => {
       dot.isActive = false;
@@ -89,27 +89,27 @@ const DotGridBackground = () => {
       const dx = mousePos.x - lastMousePosRef.current.x;
       const dy = mousePos.y - lastMousePosRef.current.y;
       const mouseChanged = Math.sqrt(dx * dx + dy * dy) > 2;
-      
+
       let needsRedraw = false;
       let activeThisFrame = false;
-      
+
       if (mouseChanged) {
         lastMousePosRef.current = { ...mousePos };
-        
+
         // Add newly affected dots to active set
         const mouseX = mousePos.x;
         const mouseY = mousePos.y;
-        
+
         dotsRef.current.forEach((dot, idx) => {
           const dx = mouseX - dot.x;
           const dy = mouseY - dot.y;
           const distanceSq = dx * dx + dy * dy;
-          
+
           if (distanceSq < MAX_DISTANCE_SQ) {
             const distance = Math.sqrt(distanceSq);
             const force = (MAX_DISTANCE - distance) / MAX_DISTANCE;
             const angle = Math.atan2(dy, dx);
-            
+
             // Push dot away from mouse
             dot.targetX = dot.x + Math.cos(angle + Math.PI) * force * STRENGTH;
             dot.targetY = dot.y + Math.sin(angle + Math.PI) * force * STRENGTH;
@@ -124,28 +124,28 @@ const DotGridBackground = () => {
           }
         });
       }
-      
+
       let isSettling = false;
-      
+
       // Only process active dots or dots that were recently active
       for (let idx of activeDots) {
         const dot = dotsRef.current[idx];
         if (!dot) continue;
-        
+
         dot.currentX += (dot.targetX - dot.currentX) * EASING;
         dot.currentY += (dot.targetY - dot.currentY) * EASING;
-        
+
         // Track if this dot needs redrawing
         const changeX = Math.abs(dot.currentX - dot.lastDrawnX);
         const changeY = Math.abs(dot.currentY - dot.lastDrawnY);
         if (changeX > MIN_CHANGE || changeY > MIN_CHANGE) {
           needsRedraw = true;
         }
-        
+
         // Check if still settling AFTER easing
         const dx = Math.abs(dot.currentX - dot.targetX);
         const dy = Math.abs(dot.currentY - dot.targetY);
-        
+
         if (dx > 0.1 || dy > 0.1) {
           isSettling = true;
         } else if (dot.targetX === dot.x && dot.targetY === dot.y) {
@@ -154,19 +154,19 @@ const DotGridBackground = () => {
           dot.isActive = false;
         }
       }
-      
+
       // If nothing changed and nothing is settling, skip redraw entirely
       if (!needsRedraw && !isSettling && hasRendered && activeDots.size === 0) {
         animationFrameRef.current = requestAnimationFrame(animate);
         return;
       }
-      
+
       // Always redraw if something changed, settling, or never rendered
       if (needsRedraw || isSettling || !hasRendered) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Draw each dot individually to avoid path issues
-        ctx.fillStyle = '#3b82f6'; // data-blue color
+
+        // Warm stone dot color matching design system
+        ctx.fillStyle = '#DDD9D2';
         dotsRef.current.forEach(dot => {
           ctx.beginPath();
           ctx.arc(dot.currentX, dot.currentY, DOT_RADIUS, 0, Math.PI * 2);
@@ -174,7 +174,7 @@ const DotGridBackground = () => {
           dot.lastDrawnX = dot.currentX;
           dot.lastDrawnY = dot.currentY;
         });
-        
+
         hasRendered = true;
       }
 
@@ -207,7 +207,7 @@ const DotGridBackground = () => {
           pointerEvents: 'none',
         }}
       />
-      {/* Overlay for readability */}
+      {/* Overlay for readability - warm off-white */}
       <div
         style={{
           position: 'fixed',
@@ -215,7 +215,7 @@ const DotGridBackground = () => {
           left: 0,
           width: '100%',
           height: '100%',
-          background: 'rgba(249, 250, 251, 0.85)',
+          background: 'rgba(240, 237, 232, 0.88)',
           zIndex: 0,
           pointerEvents: 'none',
         }}
@@ -225,4 +225,3 @@ const DotGridBackground = () => {
 };
 
 export default DotGridBackground;
-

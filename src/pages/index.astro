@@ -3,52 +3,46 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<main class="max-w-5xl mx-auto px-6 py-12 relative">
+	<main class="max-w-3xl mx-auto px-6 py-12 relative">
 		<!-- About Section -->
-		<section class="mb-16 bg-white/60 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20 animate-fade-in">
-			<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 rounded-t-xl"></div>
-			<h1 class="text-6xl font-bold mb-6 text-gray-900 tracking-tight">Joe Vero</h1>
-			<p class="text-xl text-gray-600 leading-relaxed mb-6">
+		<section class="mb-14 bg-vero-card rounded-lg py-5 px-6 shadow-warm border border-vero-border animate-fade-in">
+			<h1 class="text-3xl font-normal mb-5 text-vero-text font-serif" style="letter-spacing: -0.025em;">Joe Vero</h1>
+			<p class="text-base text-vero-text-mid leading-relaxed mb-4" style="line-height: 1.8;">
 				I am a PhD student in the Department of Psychology at Rutgers University. My research interests are in the area of motor control and human movement. I primarily use consumer-grade sensors to study human movement and motor control.
 			</p>
-			<p class="text-gray-700 leading-relaxed">
-				I  am interested in understanding how humans control their movement and how this control is influenced by the environment. I am also interested in understanding how humans control their movement in typical and atypical populations.
+			<p class="text-base text-vero-text leading-relaxed" style="line-height: 1.8;">
+				I am interested in understanding how humans control their movement and how this control is influenced by the environment. I am also interested in understanding how humans control their movement in typical and atypical populations.
 			</p>
 		</section>
 
 		<!-- Blog Posts Section -->
-		<section class="border-t border-gray-200 pt-12 animate-slide-up">
-			<h2 class="text-4xl font-bold mb-8 text-gray-900 tracking-tight">Recent Posts</h2>
-			<div class="space-y-6">
+		<section class="pt-2 animate-slide-up">
+			<h2 class="text-xs font-semibold uppercase tracking-widest text-vero-text-muted mb-6">Recent Posts</h2>
+			<div class="space-y-4">
 				<!-- Blog Post Entry -->
-				<article class="group border border-gray-200 rounded-lg p-6 hover:shadow-xl transition-all duration-300 bg-white/60 backdrop-blur-sm hover:-translate-y-1 relative overflow-hidden">
-					<div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+				<article class="group border border-vero-border rounded-lg p-5 bg-vero-card shadow-warm card-hover relative overflow-hidden">
 					<a href="/blog/first-post" class="block">
-						<div class="flex items-center gap-2 mb-2">
-							<div class="h-1.5 w-3 bg-blue-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-							<h3 class="text-2xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-								What I did for my master's thesis
-							</h3>
-						</div>
-						<p class="text-gray-600 mb-4">
-							A study of motor control using an interactive Connect the Dots task. 
+						<h3 class="text-xl font-normal text-vero-text group-hover:text-vero-accent transition-colors font-serif mb-2">
+							What I did for my master's thesis
+						</h3>
+						<p class="text-sm text-vero-text-mid leading-relaxed mb-3" style="line-height: 1.8;">
+							A study of motor control using an interactive Connect the Dots task.
 							Explore how humans execute precise movements under varying cognitive load, and what that means for characterizing neurological disorders.
 						</p>
-						<div class="flex items-center gap-4 text-sm text-gray-500">
-							<time datetime="2025-10-25">October 2025</time>
-							<span>•</span>
+						<div class="flex items-center gap-3 text-xs text-vero-text-muted">
+							<time datetime="2025-10-25">25 Oct 2025</time>
+							<span>&middot;</span>
 							<span>Interactive</span>
 						</div>
 					</a>
 				</article>
 
 				<!-- Placeholder for future posts -->
-				<article class="group border border-gray-200 rounded-lg p-6 opacity-50 bg-white/60 backdrop-blur-sm relative overflow-hidden">
-					<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-data-orange to-data-orange/50"></div>
-					<h3 class="text-2xl font-semibold mb-2 text-gray-400">
+				<article class="group border border-vero-border rounded-lg p-5 opacity-50 bg-vero-card relative overflow-hidden">
+					<h3 class="text-xl font-normal mb-2 text-vero-text-muted font-serif">
 						Coming Soon: What I am doing for my PhD thesis!
 					</h3>
-					<p class="text-gray-400 mb-4">
+					<p class="text-sm text-vero-text-muted mb-3" style="line-height: 1.8;">
 						Exploring how humans control their movement in an unsupervised setting with visual feedback.
 					</p>
 				</article>

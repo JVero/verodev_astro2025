@@ -3,51 +3,50 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<main class="max-w-4xl mx-auto px-6 py-12 relative">
+	<main class="max-w-3xl mx-auto px-6 py-12 relative">
 		<div class="mb-8 animate-fade-in">
-			<h1 class="text-5xl font-bold tracking-tight mb-6">Resume</h1>
+			<h1 class="text-3xl font-normal font-serif text-vero-text" style="letter-spacing: -0.025em;">Resume</h1>
 		</div>
 
-		<article class="prose prose-lg max-w-none bg-white rounded-xl p-8 shadow-lg border border-white/20 animate-fade-in relative overflow-hidden">
-			<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400"></div>
-			
+		<article class="bg-vero-card rounded-lg py-5 px-6 shadow-warm border border-vero-border animate-fade-in relative overflow-hidden">
+
 			<!-- Header -->
-			<header class="mb-8 pb-6 border-b-2 border-gray-200">
-				<h1 class="text-4xl font-bold mb-2">Joe Vero</h1>
-				<p class="text-gray-600">PhD Student in Psychology</p>
-				<div class="mt-4 text-sm text-gray-500">
+			<header class="mb-8 pb-6 border-b border-vero-border">
+				<h1 class="text-3xl font-normal mb-1 font-serif text-vero-text" style="letter-spacing: -0.025em;">Joe Vero</h1>
+				<p class="text-vero-text-mid text-sm">PhD Student in Psychology</p>
+				<div class="mt-3 text-xs text-vero-text-muted">
 					<p>Rutgers University</p>
-					<p class="mt-1">Motor Control & Human Movement Research</p>
+					<p class="mt-0.5">Motor Control & Human Movement Research</p>
 				</div>
 			</header>
 
 			<!-- Contact Information -->
 			<section class="mb-8">
-				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Contact</h2>
-				<div class="text-sm space-y-1 text-gray-700">
-					<p>Email: joseph.vero@rutgers.edu</p>
-					<p>Website: <a href="https://vero.dev" class="text-blue-600 hover:underline">vero.dev (this website)</a></p>
+				<h2 class="text-xs font-semibold uppercase tracking-widest text-vero-text-muted mb-4 pb-2 border-b border-vero-border">Contact</h2>
+				<div class="text-sm space-y-1 text-vero-text-mid">
+					<p>Email: joe@vero.dev</p>
+					<p>Website: <a href="https://vero.dev" class="text-vero-accent hover:opacity-80 transition-opacity" style="border-bottom: 1px solid rgba(156,68,48,0.25);">vero.dev (this website)</a></p>
 					<p>Location: New Jersey, USA</p>
 				</div>
 			</section>
 
 			<!-- Education -->
 			<section class="mb-8">
-				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Education</h2>
-				<div class="space-y-4">
-					<details class="resume-details group border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+				<h2 class="text-xs font-semibold uppercase tracking-widest text-vero-text-muted mb-4 pb-2 border-b border-vero-border">Education</h2>
+				<div class="space-y-3">
+					<details class="resume-details group border border-vero-border rounded-lg p-4 hover:shadow-warm-hover transition-all duration-150">
 						<summary class="cursor-pointer list-none">
 							<div class="flex justify-between items-start">
-								<h3 class="font-bold text-lg">Ph.D. in Cognitive Science</h3>
-								<span class="text-gray-600 text-sm">September 2023 - Present</span>
+								<h3 class="font-normal text-base font-serif text-vero-text">Ph.D. in Cognitive Science</h3>
+								<span class="text-vero-text-muted text-xs">September 2023 - Present</span>
 							</div>
-							<p class="text-gray-600">Rutgers University, New Jersey</p>
-							<p class="text-sm text-gray-700 mt-1">Specialization: Motor Control and Human Movement</p>
+							<p class="text-vero-text-mid text-sm">Rutgers University, New Jersey</p>
+							<p class="text-xs text-vero-text-mid mt-1">Specialization: Motor Control and Human Movement</p>
 						</summary>
-						<div class="mt-4 pt-4 border-t border-gray-200 space-y-3">
+						<div class="mt-4 pt-4 border-t border-vero-border space-y-3">
 							<div>
-								<h4 class="font-semibold text-sm text-gray-800 mb-2">Relevant Coursework:</h4>
-								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+								<h4 class="font-semibold text-xs text-vero-text-mid mb-2 uppercase tracking-wide">Relevant Coursework:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-vero-text-mid">
 									<li>Computational Motor Control</li>
 									<li>Statistical Methods in Cognitive Science</li>
 									<li>Research Methods in Motor Behavior</li>
@@ -55,8 +54,8 @@ import Layout from '../layouts/Layout.astro';
 								</ul>
 							</div>
 							<div>
-								<h4 class="font-semibold text-sm text-gray-800 mb-2">Current Research Projects:</h4>
-								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+								<h4 class="font-semibold text-xs text-vero-text-mid mb-2 uppercase tracking-wide">Current Research Projects:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-vero-text-mid">
 									<li>Developing web-based experimental paradigms for motor control assessment</li>
 									<li>Analyzing unsupervised movement patterns in typical and atypical populations</li>
 									<li>Creating tools for real-time trajectory data analysis</li>
@@ -64,24 +63,24 @@ import Layout from '../layouts/Layout.astro';
 							</div>
 						</div>
 					</details>
-					
-					<details class="resume-details group border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+
+					<details class="resume-details group border border-vero-border rounded-lg p-4 hover:shadow-warm-hover transition-all duration-150">
 						<summary class="cursor-pointer list-none">
 							<div class="flex justify-between items-start">
-								<h3 class="font-bold text-lg">Master's Degree</h3>
-								<span class="text-gray-600 text-sm">September 2023 - May 2025</span>
+								<h3 class="font-normal text-base font-serif text-vero-text">Master's Degree</h3>
+								<span class="text-vero-text-muted text-xs">September 2023 - May 2025</span>
 							</div>
-							<p class="text-gray-600">Rutgers University, New Jersey</p>
-							<p class="text-sm text-gray-700 mt-1">Thesis: Interpretable biomarkers for cognitive load utilizing drawing data from consumer-grade tablets</p>
+							<p class="text-vero-text-mid text-sm">Rutgers University, New Jersey</p>
+							<p class="text-xs text-vero-text-mid mt-1">Thesis: Interpretable biomarkers for cognitive load utilizing drawing data from consumer-grade tablets</p>
 						</summary>
-						<div class="mt-4 pt-4 border-t border-gray-200 space-y-3">
+						<div class="mt-4 pt-4 border-t border-vero-border space-y-3">
 							<div>
-								<h4 class="font-semibold text-sm text-gray-800 mb-2">Thesis Work:</h4>
-								<p class="text-sm text-gray-700">Designed and developed an interactive web-based experimental task to collect high-resolution drawing trajectory data. Implemented real-time data capture and analysis pipelines using JavaScript and Python.</p>
+								<h4 class="font-semibold text-xs text-vero-text-mid mb-2 uppercase tracking-wide">Thesis Work:</h4>
+								<p class="text-sm text-vero-text-mid">Designed and developed an interactive web-based experimental task to collect high-resolution drawing trajectory data. Implemented real-time data capture and analysis pipelines using JavaScript and Python.</p>
 							</div>
 							<div>
-								<h4 class="font-semibold text-sm text-gray-800 mb-2">Key Courses:</h4>
-								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+								<h4 class="font-semibold text-xs text-vero-text-mid mb-2 uppercase tracking-wide">Key Courses:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-vero-text-mid">
 									<li>Advanced Data Analysis</li>
 									<li>Human-Computer Interaction</li>
 									<li>Motor Control Theory</li>
@@ -90,19 +89,19 @@ import Layout from '../layouts/Layout.astro';
 						</div>
 					</details>
 
-					<details class="resume-details group border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+					<details class="resume-details group border border-vero-border rounded-lg p-4 hover:shadow-warm-hover transition-all duration-150">
 						<summary class="cursor-pointer list-none">
 							<div class="flex justify-between items-start">
-								<h3 class="font-bold text-lg">Bachelor's Degree</h3>
-								<span class="text-gray-600 text-sm">September 2012 - May 2016</span>
+								<h3 class="font-normal text-base font-serif text-vero-text">Bachelor's Degree</h3>
+								<span class="text-vero-text-muted text-xs">September 2012 - May 2016</span>
 							</div>
-							<p class="text-gray-600">Rutgers University, New Jersey</p>
-							<p class="text-sm text-gray-700 mt-1">Major: Biomedical Engineering, with Honors</p>
+							<p class="text-vero-text-mid text-sm">Rutgers University, New Jersey</p>
+							<p class="text-xs text-vero-text-mid mt-1">Major: Biomedical Engineering, with Honors</p>
 						</summary>
-						<div class="mt-4 pt-4 border-t border-gray-200 space-y-3">
+						<div class="mt-4 pt-4 border-t border-vero-border space-y-3">
 							<div>
-								<h4 class="font-semibold text-sm text-gray-800 mb-2">Key Courses:</h4>
-								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+								<h4 class="font-semibold text-xs text-vero-text-mid mb-2 uppercase tracking-wide">Key Courses:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-vero-text-mid">
 									<li>Biomedical Instrumentation</li>
 									<li>Biomechanics</li>
 									<li>Signal Processing</li>
@@ -116,64 +115,64 @@ import Layout from '../layouts/Layout.astro';
 
 			<!-- Research Experience -->
 			<section class="mb-8">
-				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Research Experience</h2>
-				<div class="space-y-4">
-					<details class="resume-details group border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+				<h2 class="text-xs font-semibold uppercase tracking-widest text-vero-text-muted mb-4 pb-2 border-b border-vero-border">Research Experience</h2>
+				<div class="space-y-3">
+					<details class="resume-details group border border-vero-border rounded-lg p-4 hover:shadow-warm-hover transition-all duration-150">
 						<summary class="cursor-pointer list-none">
 							<div class="flex justify-between items-start mb-1">
-								<h3 class="font-bold text-lg">PhD Research</h3>
-								<span class="text-gray-600 text-sm">September 2023 - Present</span>
+								<h3 class="font-normal text-base font-serif text-vero-text">PhD Research</h3>
+								<span class="text-vero-text-muted text-xs">September 2023 - Present</span>
 							</div>
-							<p class="text-gray-600">Rutgers University, Department of Psychology</p>
-							<ul class="list-disc ml-6 mt-2 text-sm space-y-1 text-gray-700">
+							<p class="text-vero-text-mid text-sm">Rutgers University, Department of Psychology</p>
+							<ul class="list-disc ml-6 mt-2 text-sm space-y-1 text-vero-text-mid">
 								<li>Investigate motor control and human movement using consumer-grade sensors</li>
 								<li>Study how humans control their movement in typical and atypical populations</li>
 								<li>Research how environmental factors influence motor control</li>
 								<li>Develop experimental paradigms for unsupervised motor control assessment</li>
 							</ul>
 						</summary>
-						<div class="mt-4 pt-4 border-t border-gray-200 space-y-3">
+						<div class="mt-4 pt-4 border-t border-vero-border space-y-3">
 							<div>
-								<h4 class="font-semibold text-sm text-gray-800 mb-2">Key Projects:</h4>
-								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+								<h4 class="font-semibold text-xs text-vero-text-mid mb-2 uppercase tracking-wide">Key Projects:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-vero-text-mid">
 									<li>Web-based motor assessment platform development</li>
 									<li>Real-time trajectory analysis algorithms</li>
 									<li>Data collection and analysis pipeline optimization</li>
 								</ul>
 							</div>
 							<div>
-								<h4 class="font-semibold text-sm text-gray-800 mb-2">Technologies Used:</h4>
-								<p class="text-sm text-gray-700">JavaScript, Python, React, Statistical Analysis, Sensor Integration, Data Visualization</p>
+								<h4 class="font-semibold text-xs text-vero-text-mid mb-2 uppercase tracking-wide">Technologies Used:</h4>
+								<p class="text-sm text-vero-text-mid">JavaScript, Python, React, Statistical Analysis, Sensor Integration, Data Visualization</p>
 							</div>
 						</div>
 					</details>
 
-					<details class="resume-details group border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+					<details class="resume-details group border border-vero-border rounded-lg p-4 hover:shadow-warm-hover transition-all duration-150">
 						<summary class="cursor-pointer list-none">
 							<div class="flex justify-between items-start mb-1">
-								<h3 class="font-bold text-lg">Master's Thesis Research</h3>
-								<span class="text-gray-600 text-sm">September 2021 - May 2023</span>
+								<h3 class="font-normal text-base font-serif text-vero-text">Master's Thesis Research</h3>
+								<span class="text-vero-text-muted text-xs">September 2021 - May 2023</span>
 							</div>
-							<p class="text-gray-600">Rutgers University</p>
-							<ul class="list-disc ml-6 mt-2 text-sm space-y-1 text-gray-700">
+							<p class="text-vero-text-mid text-sm">Rutgers University</p>
+							<ul class="list-disc ml-6 mt-2 text-sm space-y-1 text-vero-text-mid">
 								<li>Designed and implemented interactive Connect the Dots task</li>
 								<li>Collected and analyzed high-resolution trajectory data</li>
 								<li>Examined movement planning and execution strategies</li>
 								<li>Explored relationship between movement complexity and performance</li>
 							</ul>
 						</summary>
-						<div class="mt-4 pt-4 border-t border-gray-200 space-y-3">
+						<div class="mt-4 pt-4 border-t border-vero-border space-y-3">
 							<div>
-								<h4 class="font-semibold text-sm text-gray-800 mb-2">Thesis Contributions:</h4>
-								<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+								<h4 class="font-semibold text-xs text-vero-text-mid mb-2 uppercase tracking-wide">Thesis Contributions:</h4>
+								<ul class="list-disc ml-6 text-sm space-y-1 text-vero-text-mid">
 									<li>Developed novel methodology for quantifying motor control using consumer-grade tablets</li>
 									<li>Created open-source web-based experimental framework</li>
 									<li>Analyzed trajectory data from 100+ participants</li>
 								</ul>
 							</div>
 							<div>
-								<h4 class="font-semibold text-sm text-gray-800 mb-2">Publications:</h4>
-								<p class="text-sm text-gray-700">Results from this work contributed to multiple published papers on motor control and movement analysis.</p>
+								<h4 class="font-semibold text-xs text-vero-text-mid mb-2 uppercase tracking-wide">Publications:</h4>
+								<p class="text-sm text-vero-text-mid">Results from this work contributed to multiple published papers on motor control and movement analysis.</p>
 							</div>
 						</div>
 					</details>
@@ -182,34 +181,34 @@ import Layout from '../layouts/Layout.astro';
 
 			<!-- Skills -->
 			<section class="mb-8">
-				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Technical Skills</h2>
+				<h2 class="text-xs font-semibold uppercase tracking-widest text-vero-text-muted mb-4 pb-2 border-b border-vero-border">Technical Skills</h2>
 				<div class="grid grid-cols-2 gap-4">
 					<div>
-						<h3 class="font-semibold mb-2">Programming & Data</h3>
-						<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+						<h3 class="font-semibold text-sm text-vero-text mb-2">Programming & Data</h3>
+						<ul class="list-disc ml-6 text-sm space-y-1 text-vero-text-mid">
 							<li>Python</li>
-                            <li>Matlab</li>
-                            <li>C++</li>
-                            <li>R</li>
-                            <li>Excel</li>
-                            <li>Swift</li>
-                            <li>iOS Development</li>
+							<li>Matlab</li>
+							<li>C++</li>
+							<li>R</li>
+							<li>Excel</li>
+							<li>Swift</li>
+							<li>iOS Development</li>
 							<li>Data Analysis</li>
 							<li>Statistical Modeling</li>
-                            <li>Data Science</li>
+							<li>Data Science</li>
 						</ul>
 					</div>
 					<div>
-						<h3 class="font-semibold mb-2">Research Methods</h3>
-						<ul class="list-disc ml-6 text-sm space-y-1 text-gray-700">
+						<h3 class="font-semibold text-sm text-vero-text mb-2">Research Methods</h3>
+						<ul class="list-disc ml-6 text-sm space-y-1 text-vero-text-mid">
 							<li>Sensor Integration</li>
 							<li>Experimental Design</li>
 							<li>Motor Control Assessment</li>
-                            <li>Experimental Design</li>
-                            <li>Data Collection</li>
-                            <li>Signal Processing</li>
-                            <li>Machine Learning</li>
-                            <li>Deep Learning</li>
+							<li>Experimental Design</li>
+							<li>Data Collection</li>
+							<li>Signal Processing</li>
+							<li>Machine Learning</li>
+							<li>Deep Learning</li>
 						</ul>
 					</div>
 				</div>
@@ -217,42 +216,42 @@ import Layout from '../layouts/Layout.astro';
 
 			<!-- Publications & Presentations -->
 			<section class="mb-8">
-				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Publications</h2>
+				<h2 class="text-xs font-semibold uppercase tracking-widest text-vero-text-muted mb-4 pb-2 border-b border-vero-border">Publications</h2>
 				<div class="space-y-4 text-sm">
-					<div class="text-gray-700">
-						<p>Bermperidis, T., <strong>Vero, J.</strong>, & Torres, E. B. (2025). On the importance of behavioral nuances: Amplifying non-obvious motor noise under true empirical considerations may lead to briefer assays and faster classification processes. <em>arXiv preprint arXiv:2508.12742</em>.</p>
+					<div class="text-vero-text-mid">
+						<p>Bermperidis, T., <strong class="text-vero-text">Vero, J.</strong>, & Torres, E. B. (2025). On the importance of behavioral nuances: Amplifying non-obvious motor noise under true empirical considerations may lead to briefer assays and faster classification processes. <em>arXiv preprint arXiv:2508.12742</em>.</p>
 					</div>
-					
-					<div class="text-gray-700">
-						<p>Torres, E. B., <strong>Vero, J.</strong>, Drain, N., Rai, R., & Bermperidis, T. (2025). Hidden social and emotional competencies in autism spectrum disorders captured through the digital lens. <em>Frontiers in Psychiatry, 16</em>, 1559202.</p>
+
+					<div class="text-vero-text-mid">
+						<p>Torres, E. B., <strong class="text-vero-text">Vero, J.</strong>, Drain, N., Rai, R., & Bermperidis, T. (2025). Hidden social and emotional competencies in autism spectrum disorders captured through the digital lens. <em>Frontiers in Psychiatry, 16</em>, 1559202.</p>
 					</div>
-					
-					<div class="text-gray-700">
-						<p>Torres, E. B., Varkey, H., <strong>Vero, J.</strong>, London, E., Phan, H., Kittler, P., Gordon, A., ... (2023). Sensing echoes: temporal misalignment in auditory brainstem responses as the earliest marker of neurodevelopmental derailment. <em>PNAS Nexus, 2</em>(2), pgac315.</p>
+
+					<div class="text-vero-text-mid">
+						<p>Torres, E. B., Varkey, H., <strong class="text-vero-text">Vero, J.</strong>, London, E., Phan, H., Kittler, P., Gordon, A., ... (2023). Sensing echoes: temporal misalignment in auditory brainstem responses as the earliest marker of neurodevelopmental derailment. <em>PNAS Nexus, 2</em>(2), pgac315.</p>
 					</div>
-					
-					<div class="text-gray-700">
-						<p>Torres, E. B., Bermperidis, T., Varkey, H., <strong>Vero, J.</strong>, London, E., Phan, H., Kittler, P., ... (2022). Sensing Echoes: Temporal misalignment as the Earliest Marker of Neurodevelopmental Derail. <em>SSRN</em> 4049202.</p>
+
+					<div class="text-vero-text-mid">
+						<p>Torres, E. B., Bermperidis, T., Varkey, H., <strong class="text-vero-text">Vero, J.</strong>, London, E., Phan, H., Kittler, P., ... (2022). Sensing Echoes: Temporal misalignment as the Earliest Marker of Neurodevelopmental Derail. <em>SSRN</em> 4049202.</p>
 					</div>
-					
-					<div class="text-gray-700">
-						<p>Ryu, J., <strong>Vero, J.</strong>, Dobkin, R. D., & Torres, E. B. (2019). Dynamic digital biomarkers of motor and cognitive function in Parkinson's disease. <em>Journal of Visualized Experiments, 149</em>(10.3791), 59827.</p>
+
+					<div class="text-vero-text-mid">
+						<p>Ryu, J., <strong class="text-vero-text">Vero, J.</strong>, Dobkin, R. D., & Torres, E. B. (2019). Dynamic digital biomarkers of motor and cognitive function in Parkinson's disease. <em>Journal of Visualized Experiments, 149</em>(10.3791), 59827.</p>
 					</div>
-					
-					<div class="text-gray-700">
-						<p>Torres, E. B., <strong>Vero, J.</strong>, & Rai, R. (2018). Statistical platform for individualized behavioral analyses using biophysical micro-movement spikes. <em>Sensors, 18</em>(4), 1025.</p>
+
+					<div class="text-vero-text-mid">
+						<p>Torres, E. B., <strong class="text-vero-text">Vero, J.</strong>, & Rai, R. (2018). Statistical platform for individualized behavioral analyses using biophysical micro-movement spikes. <em>Sensors, 18</em>(4), 1025.</p>
 					</div>
-					
-					<div class="text-gray-700">
-						<p>Caballero, C., Mistry, S., <strong>Vero, J.</strong>, & Torres, E. B. (2018). Characterization of noise signatures of involuntary head motion in the autism brain imaging data exchange repository. <em>Frontiers in Integrative Neuroscience, 12</em>, 7.</p>
+
+					<div class="text-vero-text-mid">
+						<p>Caballero, C., Mistry, S., <strong class="text-vero-text">Vero, J.</strong>, & Torres, E. B. (2018). Characterization of noise signatures of involuntary head motion in the autism brain imaging data exchange repository. <em>Frontiers in Integrative Neuroscience, 12</em>, 7.</p>
 					</div>
 				</div>
 			</section>
 
 			<!-- Research Interests -->
 			<section class="mb-8">
-				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Research Interests</h2>
-				<ul class="list-disc ml-6 space-y-2 text-sm text-gray-700">
+				<h2 class="text-xs font-semibold uppercase tracking-widest text-vero-text-muted mb-4 pb-2 border-b border-vero-border">Research Interests</h2>
+				<ul class="list-disc ml-6 space-y-2 text-sm text-vero-text-mid">
 					<li>Motor control and human movement</li>
 					<li>Consumer-grade sensor technology for movement analysis</li>
 					<li>Planning-execution loop in motor behavior</li>
@@ -264,14 +263,13 @@ import Layout from '../layouts/Layout.astro';
 
 			<!-- Additional Information -->
 			<section>
-				<h2 class="text-2xl font-bold mb-4 pb-2 border-b border-gray-200">Additional Information</h2>
-				<ul class="list-disc ml-6 space-y-2 text-sm text-gray-700">
+				<h2 class="text-xs font-semibold uppercase tracking-widest text-vero-text-muted mb-4 pb-2 border-b border-vero-border">Additional Information</h2>
+				<ul class="list-disc ml-6 space-y-2 text-sm text-vero-text-mid">
 					<li>Experience with web-based experimental paradigms</li>
 					<li>Proficient in trajectory data analysis and visualization</li>
 					<li>Strong background in statistical analysis</li>
-                    <li>Experience with data capture using various research-grade and consumer-grade sensors</li>
-                    <li>Multiple years of teaching and mentoring experience with undergraduate and graduate students</li>
-					<!-- Add more relevant skills or experiences -->
+					<li>Experience with data capture using various research-grade and consumer-grade sensors</li>
+					<li>Multiple years of teaching and mentoring experience with undergraduate and graduate students</li>
 				</ul>
 			</section>
 
@@ -300,12 +298,12 @@ import Layout from '../layouts/Layout.astro';
 	}
 
 	details.resume-details summary::after {
-		content: '▼';
+		content: '\25BC';
 		position: absolute;
 		right: 0;
 		top: 0;
 		font-size: 0.75rem;
-		color: #6b7280;
+		color: #A8A39C;
 		transition: transform 0.2s ease;
 	}
 
@@ -329,10 +327,10 @@ import Layout from '../layouts/Layout.astro';
 		}
 	}
 
-	/* Better styling when hovered/expanded */
+	/* Warm styling when expanded */
 	details.resume-details[open] {
-		background-color: #f9fafb;
-		border-color: #3b82f6;
+		background-color: #F0EDE8;
+		border-color: #9C4430;
 	}
 </style>
 
@@ -340,7 +338,7 @@ import Layout from '../layouts/Layout.astro';
 	// Add smooth collapse/expand behavior
 	document.addEventListener('DOMContentLoaded', () => {
 		const details = document.querySelectorAll('details.resume-details');
-		
+
 		details.forEach(detail => {
 			detail.addEventListener('toggle', () => {
 				// Optional: Auto-close other sections (accordion behavior)

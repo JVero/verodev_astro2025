@@ -22,13 +22,13 @@ const ConnectDotsTask = () => {
   // Generate random positions for targets
   const generateTargets = (diff) => {
     const newTargets = [];
-    
+
     for (let i = 0; i < NUM_TARGETS; i++) {
       let x, y, tooClose;
       do {
         x = BORDER_PADDING + Math.random() * (CANVAS_WIDTH - 2 * BORDER_PADDING);
         y = BORDER_PADDING + Math.random() * (CANVAS_HEIGHT - 2 * BORDER_PADDING);
-        
+
         // Check if too close to existing targets
         tooClose = newTargets.some(target => {
           const dist = Math.sqrt((target.x - x) ** 2 + (target.y - y) ** 2);
@@ -41,14 +41,14 @@ const ConnectDotsTask = () => {
         label = (i + 1).toString();
       } else {
         // Alternating: 1, A, 2, B, 3, C, etc.
-        label = i % 2 === 0 
-          ? ((i / 2) + 1).toString() 
+        label = i % 2 === 0
+          ? ((i / 2) + 1).toString()
           : String.fromCharCode(65 + Math.floor(i / 2));
       }
 
       newTargets.push({ x, y, label, index: i });
     }
-    
+
     return newTargets;
   };
 
@@ -61,32 +61,32 @@ const ConnectDotsTask = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
-    
+
     // Clear canvas
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    
-    // Draw background
-    ctx.fillStyle = '#f8f9fa';
+
+    // Draw background — warm off-white
+    ctx.fillStyle = '#F0EDE8';
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    
-    // Draw boundary indicator to show safe drawing area
-    ctx.strokeStyle = '#e5e7eb';
+
+    // Draw boundary indicator — warm stone border
+    ctx.strokeStyle = '#EBE8E3';
     ctx.lineWidth = 2;
     ctx.setLineDash([5, 5]);
     ctx.strokeRect(
-      BORDER_PADDING, 
-      BORDER_PADDING, 
-      CANVAS_WIDTH - 2 * BORDER_PADDING, 
+      BORDER_PADDING,
+      BORDER_PADDING,
+      CANVAS_WIDTH - 2 * BORDER_PADDING,
       CANVAS_HEIGHT - 2 * BORDER_PADDING
     );
     ctx.setLineDash([]); // Reset line dash
-    
-    // Draw completed trajectory lines
+
+    // Draw completed trajectory lines — accent color
     trajectoryData.forEach((stroke, idx) => {
       if (stroke.length > 1) {
-        ctx.strokeStyle = '#3b82f6';
+        ctx.strokeStyle = '#9C4430';
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(stroke[0].x, stroke[0].y);
@@ -96,10 +96,10 @@ const ConnectDotsTask = () => {
         ctx.stroke();
       }
     });
-    
+
     // Draw current stroke
     if (currentStroke.length > 1) {
-      ctx.strokeStyle = '#3b82f6';
+      ctx.strokeStyle = '#9C4430';
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.moveTo(currentStroke[0].x, currentStroke[0].y);
@@ -108,35 +108,35 @@ const ConnectDotsTask = () => {
       }
       ctx.stroke();
     }
-    
+
     // Draw targets
     targets.forEach((target, idx) => {
       const isCompleted = idx < currentIndex;
-      
+
       // Draw circle
       ctx.beginPath();
       ctx.arc(target.x, target.y, DOT_RADIUS, 0, 2 * Math.PI);
-      
+
       if (isCompleted) {
-        ctx.fillStyle = '#10b981';
-        ctx.strokeStyle = '#059669';
+        ctx.fillStyle = '#9C4430'; // accent for completed
+        ctx.strokeStyle = '#7A3526';
       } else {
-        ctx.fillStyle = '#e5e7eb';
-        ctx.strokeStyle = '#9ca3af';
+        ctx.fillStyle = '#EBE8E3'; // warm stone for incomplete
+        ctx.strokeStyle = '#DDD9D2';
       }
-      
+
       ctx.fill();
       ctx.lineWidth = 3;
       ctx.stroke();
-      
+
       // Draw label
-      ctx.fillStyle = isCompleted ? '#ffffff' : '#1f2937';
-      ctx.font = 'bold 18px sans-serif';
+      ctx.fillStyle = isCompleted ? '#ffffff' : '#1A1816';
+      ctx.font = 'bold 18px -apple-system, system-ui, sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(target.label, target.x, target.y);
     });
-    
+
   }, [targets, currentIndex, trajectoryData, currentStroke]);
 
   const resetTask = () => {
@@ -153,9 +153,11 @@ const ConnectDotsTask = () => {
   const getMousePos = (e) => {
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
     return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY
     };
   };
 
@@ -166,16 +168,16 @@ const ConnectDotsTask = () => {
 
   const handleMouseDown = (e) => {
     if (completed) return;
-    
+
     const pos = getMousePos(e);
     const currentTarget = targets[currentIndex];
-    
+
     if (isInsideTarget(pos, currentTarget)) {
       setIsDrawing(true);
       if (startTimeRef.current === null) {
         startTimeRef.current = performance.now();
       }
-      
+
       // Mark the clicked target as complete immediately
       // This means we're starting to draw TO the next target
       const fromTargetIndex = currentIndex;
@@ -188,7 +190,7 @@ const ConnectDotsTask = () => {
         }
         return prev + 1;
       });
-      
+
       setCurrentStroke([{
         x: pos.x,
         y: pos.y,
@@ -200,9 +202,9 @@ const ConnectDotsTask = () => {
 
   const handleMouseMove = (e) => {
     if (!isDrawing) return;
-    
+
     const pos = getMousePos(e);
-    
+
     // Check minimum distance from previous point to improve data quality
     // Only add the point if it's far enough from the last point
     if (currentStroke.length > 0) {
@@ -214,17 +216,17 @@ const ConnectDotsTask = () => {
         return; // Skip this point, it's too close to the previous one
       }
     }
-    
+
     // Get the target we're drawing TO (which is currentIndex)
     const targetWeAreDrawingTo = targets[currentIndex];
-    
+
     setCurrentStroke(prev => [...prev, {
       x: pos.x,
       y: pos.y,
       timestamp: performance.now() - startTimeRef.current,
       targetIndex: currentIndex
     }]);
-    
+
     // Check if we've entered the target we're aiming for
     if (isInsideTarget(pos, targetWeAreDrawingTo)) {
       // We're inside the target - check if this is different from last position
@@ -237,10 +239,10 @@ const ConnectDotsTask = () => {
           timestamp: performance.now() - startTimeRef.current,
           targetIndex: currentIndex
         }];
-        
+
         setTrajectoryData(prev => [...prev, finalStroke]);
         setCurrentStroke([]);
-        
+
         // Check if we just reached the last target
         if (currentIndex === targets.length - 1) {
           // Task completed!
@@ -255,13 +257,13 @@ const ConnectDotsTask = () => {
 
   const handleMouseUp = (e) => {
     if (!isDrawing) return;
-    
+
     // If we're still drawing when mouse is released, the task failed
     // (they lifted the mouse before reaching the target)
     if (!completed) {
       resetTask();
     }
-    
+
     setIsDrawing(false);
   };
 
@@ -270,11 +272,11 @@ const ConnectDotsTask = () => {
       difficulty,
       targets: targets.map(t => ({ x: t.x, y: t.y, label: t.label, index: t.index })),
       trajectoryData,
-      totalTime: trajectoryData.length > 0 
-        ? trajectoryData[trajectoryData.length - 1][trajectoryData[trajectoryData.length - 1].length - 1].timestamp 
+      totalTime: trajectoryData.length > 0
+        ? trajectoryData[trajectoryData.length - 1][trajectoryData[trajectoryData.length - 1].length - 1].timestamp
         : 0
     }, null, 2);
-    
+
     const dataBlob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
@@ -286,7 +288,7 @@ const ConnectDotsTask = () => {
 
   const getTrajectoryStats = () => {
     if (trajectoryData.length === 0) return null;
-    
+
     const stats = trajectoryData.map((stroke, idx) => {
       const distance = stroke.reduce((acc, point, i) => {
         if (i === 0) return 0;
@@ -294,10 +296,10 @@ const ConnectDotsTask = () => {
         const dy = point.y - stroke[i-1].y;
         return acc + Math.sqrt(dx * dx + dy * dy);
       }, 0);
-      
+
       const duration = stroke[stroke.length - 1].timestamp - stroke[0].timestamp;
       const avgVelocity = distance / (duration / 1000); // pixels per second
-      
+
       return {
         segment: `${targets[idx].label} → ${targets[idx + 1]?.label || 'End'}`,
         points: stroke.length,
@@ -306,56 +308,73 @@ const ConnectDotsTask = () => {
         avgVelocity: avgVelocity.toFixed(2)
       };
     });
-    
+
     return stats;
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 space-y-4">
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Connect the Dots Task</h2>
-        
-        <div className="mb-6 space-y-4">
-          <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-            <div className="flex items-center gap-4">
-              <label className="font-semibold text-gray-700">Difficulty:</label>
-              <div className="flex items-center gap-3">
-                <span className={`text-sm font-medium ${difficulty === 'numbers' ? 'text-blue-600' : 'text-gray-500'}`}>
+    <div className="w-full max-w-4xl mx-auto space-y-4">
+      <div style={{ background: '#FDFCFA', borderRadius: 8, border: '1px solid #EBE8E3', boxShadow: '0 1px 2px rgba(120,110,100,0.04)', padding: '24px' }}>
+        <h2 style={{ fontFamily: '"Newsreader", ui-serif, Georgia, serif', fontSize: 22, fontWeight: 400, color: '#1A1816', marginBottom: 20, letterSpacing: '-0.015em', marginTop: 0 }}>Connect the Dots Task</h2>
+
+        <div style={{ marginBottom: 20 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: '#F0EDE8', borderRadius: 8, border: '1px solid #EBE8E3' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <label style={{ fontWeight: 600, fontSize: 13, color: '#5C5852' }}>Difficulty:</label>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ fontSize: 13, fontWeight: 500, color: difficulty === 'numbers' ? '#9C4430' : '#A8A39C' }}>
                   Numbers
                 </span>
                 <button
                   onClick={() => setDifficulty(difficulty === 'numbers' ? 'alternating' : 'numbers')}
                   disabled={isDrawing || (currentIndex > 0 && !completed)}
-                  className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                    difficulty === 'alternating' ? 'bg-blue-600' : 'bg-gray-300'
-                  } ${(isDrawing || (currentIndex > 0 && !completed)) ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                  style={{
+                    position: 'relative',
+                    display: 'inline-flex',
+                    height: 28,
+                    width: 48,
+                    alignItems: 'center',
+                    borderRadius: 14,
+                    border: 'none',
+                    transition: 'background-color 0.15s ease',
+                    backgroundColor: difficulty === 'alternating' ? '#9C4430' : '#DDD9D2',
+                    cursor: (isDrawing || (currentIndex > 0 && !completed)) ? 'not-allowed' : 'pointer',
+                    opacity: (isDrawing || (currentIndex > 0 && !completed)) ? 0.5 : 1,
+                    padding: 0,
+                  }}
                 >
                   <span
-                    className={`inline-block h-6 w-6 transform rounded-full bg-white transition-transform ${
-                      difficulty === 'alternating' ? 'translate-x-7' : 'translate-x-1'
-                    }`}
+                    style={{
+                      display: 'inline-block',
+                      height: 22,
+                      width: 22,
+                      borderRadius: '50%',
+                      backgroundColor: '#FDFCFA',
+                      transition: 'transform 0.15s ease',
+                      transform: difficulty === 'alternating' ? 'translateX(23px)' : 'translateX(3px)',
+                    }}
                   />
                 </button>
-                <span className={`text-sm font-medium ${difficulty === 'alternating' ? 'text-blue-600' : 'text-gray-500'}`}>
+                <span style={{ fontSize: 13, fontWeight: 500, color: difficulty === 'alternating' ? '#9C4430' : '#A8A39C' }}>
                   Alternating
                 </span>
               </div>
             </div>
-            
+
             <button
               onClick={resetTask}
-              className="px-6 py-2 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 active:bg-red-700 transition-colors shadow-sm"
+              style={{ padding: '7px 16px', background: '#9C4430', color: '#fff', border: 'none', fontWeight: 600, fontSize: 13, borderRadius: 6, cursor: 'pointer' }}
             >
               Reset
             </button>
           </div>
-          
-          <div className="text-sm text-gray-600 bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <p><strong className="text-blue-800">Instructions:</strong> Click and hold on any gray dot to start, then drag to connect the dots in sequence. Release the mouse when you reach the next dot. If you release too early, the task resets!</p>
+
+          <div style={{ marginTop: 12, fontSize: 13, color: '#5C5852', background: '#F0EDE8', border: '1px solid #EBE8E3', borderRadius: 8, padding: '12px 16px', lineHeight: 1.6 }}>
+            <strong style={{ color: '#1A1816' }}>Instructions:</strong> Click and hold on any gray dot to start, then drag to connect the dots in sequence. Release the mouse when you reach the next dot. If you release too early, the task resets!
           </div>
         </div>
-        
-        <div className="border-2 border-gray-300 rounded-lg overflow-hidden mb-4 shadow-inner">
+
+        <div style={{ border: '2px solid #DDD9D2', borderRadius: 8, overflow: 'hidden', marginBottom: 16 }}>
           <canvas
             ref={canvasRef}
             width={CANVAS_WIDTH}
@@ -365,63 +384,63 @@ const ConnectDotsTask = () => {
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
             className="cursor-crosshair"
-            style={{ display: 'block' }}
+            style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
           />
         </div>
-        
+
         {completed && (
-          <div className="bg-green-50 border-2 border-green-400 rounded-lg p-4 space-y-3">
-            <p className="text-green-800 font-semibold text-lg flex items-center gap-2">
-              <span className="text-2xl">✓</span> Task Completed!
+          <div style={{ background: '#F0EDE8', border: '2px solid #9C4430', borderRadius: 8, padding: 16 }}>
+            <p style={{ color: '#1A1816', fontWeight: 600, fontSize: 16, margin: '0 0 12px 0', display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ color: '#9C4430', fontSize: 20 }}>&#10003;</span> Task Completed!
             </p>
-            <div className="flex gap-3">
+            <div style={{ display: 'flex', gap: 10 }}>
               <button
                 onClick={() => setShowData(!showData)}
-                className="px-5 py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 active:bg-blue-700 transition-colors shadow-sm"
+                style={{ padding: '7px 16px', background: 'none', border: '1px solid #DDD9D2', color: '#5C5852', fontSize: 13, fontWeight: 500, borderRadius: 6, cursor: 'pointer' }}
               >
                 {showData ? 'Hide' : 'Show'} Trajectory Data
               </button>
               <button
                 onClick={downloadTrajectoryData}
-                className="px-5 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 active:bg-green-800 transition-colors shadow-sm"
+                style={{ padding: '7px 16px', background: '#9C4430', color: '#fff', border: 'none', fontWeight: 600, fontSize: 13, borderRadius: 6, cursor: 'pointer' }}
               >
                 Download JSON
               </button>
             </div>
-            
+
             {showData && (
-              <div className="mt-4 space-y-4">
-                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
-                  <h3 className="font-semibold mb-3 text-gray-800">Trajectory Statistics</h3>
-                  <div className="overflow-x-auto">
-                    <table className="min-w-full text-sm">
+              <div style={{ marginTop: 16 }}>
+                <div style={{ background: '#FDFCFA', borderRadius: 8, padding: 16, border: '1px solid #EBE8E3', marginBottom: 12 }}>
+                  <h3 style={{ fontWeight: 600, marginBottom: 12, color: '#1A1816', fontSize: 14, marginTop: 0 }}>Trajectory Statistics</h3>
+                  <div style={{ overflowX: 'auto' }}>
+                    <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse' }}>
                       <thead>
-                        <tr className="border-b-2 border-gray-300">
-                          <th className="text-left py-2 px-3 font-semibold text-gray-700">Segment</th>
-                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Points</th>
-                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Distance (px)</th>
-                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Duration (ms)</th>
-                          <th className="text-right py-2 px-3 font-semibold text-gray-700">Avg Velocity (px/s)</th>
+                        <tr style={{ borderBottom: '2px solid #DDD9D2' }}>
+                          <th style={{ textAlign: 'left', padding: '8px 12px', fontWeight: 600, color: '#5C5852' }}>Segment</th>
+                          <th style={{ textAlign: 'right', padding: '8px 12px', fontWeight: 600, color: '#5C5852' }}>Points</th>
+                          <th style={{ textAlign: 'right', padding: '8px 12px', fontWeight: 600, color: '#5C5852' }}>Distance (px)</th>
+                          <th style={{ textAlign: 'right', padding: '8px 12px', fontWeight: 600, color: '#5C5852' }}>Duration (ms)</th>
+                          <th style={{ textAlign: 'right', padding: '8px 12px', fontWeight: 600, color: '#5C5852' }}>Avg Velocity (px/s)</th>
                         </tr>
                       </thead>
                       <tbody>
                         {getTrajectoryStats()?.map((stat, idx) => (
-                          <tr key={idx} className="border-b border-gray-200 hover:bg-gray-50">
-                            <td className="py-2 px-3 font-medium">{stat.segment}</td>
-                            <td className="text-right py-2 px-3">{stat.points}</td>
-                            <td className="text-right py-2 px-3">{stat.distance}</td>
-                            <td className="text-right py-2 px-3">{stat.duration}</td>
-                            <td className="text-right py-2 px-3">{stat.avgVelocity}</td>
+                          <tr key={idx} style={{ borderBottom: '1px solid #EBE8E3' }}>
+                            <td style={{ padding: '8px 12px', fontWeight: 500, color: '#1A1816' }}>{stat.segment}</td>
+                            <td style={{ textAlign: 'right', padding: '8px 12px', color: '#5C5852' }}>{stat.points}</td>
+                            <td style={{ textAlign: 'right', padding: '8px 12px', color: '#5C5852' }}>{stat.distance}</td>
+                            <td style={{ textAlign: 'right', padding: '8px 12px', color: '#5C5852' }}>{stat.duration}</td>
+                            <td style={{ textAlign: 'right', padding: '8px 12px', color: '#5C5852' }}>{stat.avgVelocity}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
                 </div>
-                
-                <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
-                  <h3 className="font-semibold mb-3 text-gray-800">Raw Data Preview</h3>
-                  <pre className="text-xs bg-gray-50 p-3 rounded-lg overflow-auto max-h-60 border border-gray-200 font-mono">
+
+                <div style={{ background: '#FDFCFA', borderRadius: 8, padding: 16, border: '1px solid #EBE8E3' }}>
+                  <h3 style={{ fontWeight: 600, marginBottom: 12, color: '#1A1816', fontSize: 14, marginTop: 0 }}>Raw Data Preview</h3>
+                  <pre style={{ fontSize: 12, background: '#F0EDE8', padding: 12, borderRadius: 6, overflow: 'auto', maxHeight: 240, border: '1px solid #EBE8E3', fontFamily: '"SF Mono", "Fira Code", Menlo, monospace', color: '#5C5852', margin: 0 }}>
                     {JSON.stringify({
                       difficulty,
                       numSegments: trajectoryData.length,
@@ -429,7 +448,7 @@ const ConnectDotsTask = () => {
                       samplePoint: trajectoryData[0]?.[0]
                     }, null, 2)}
                   </pre>
-                  <p className="text-xs text-gray-600 mt-2">
+                  <p style={{ fontSize: 12, color: '#A8A39C', marginTop: 8, marginBottom: 0 }}>
                     Click "Download JSON" to get the full trajectory data for analysis
                   </p>
                 </div>
@@ -437,11 +456,11 @@ const ConnectDotsTask = () => {
             )}
           </div>
         )}
-        
+
         {!completed && currentIndex > 0 && (
-          <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-3">
-            <p className="text-blue-800 font-medium">
-              Progress: <span className="font-bold">{currentIndex} / {NUM_TARGETS}</span> targets completed
+          <div style={{ background: '#F0EDE8', border: '1px solid #EBE8E3', borderRadius: 8, padding: 12 }}>
+            <p style={{ color: '#5C5852', fontWeight: 500, fontSize: 14, margin: 0 }}>
+              Progress: <span style={{ fontWeight: 700, color: '#9C4430' }}>{currentIndex} / {NUM_TARGETS}</span> targets completed
             </p>
           </div>
         )}
