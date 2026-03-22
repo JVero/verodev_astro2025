@@ -1,0 +1,113 @@
+---
+title: "Demystifying Movement: How Drawing Reveals Thinking"
+description: "An interactive walkthrough of the data pipeline from my master's thesis — perform a motor control task and watch the analysis happen on your own data."
+date: 2025-10-26
+tags: ['research', 'motor-control', 'neuroscience', 'interactive']
+---
+
+import ThesisConnectDots from '../../components/ThesisConnectDots.jsx';
+import PipelineStep from '../../components/PipelineStep.jsx';
+
+When you draw a line from point A to point B, something unremarkable happens. Your hand accelerates, reaches a peak speed, and decelerates into the target. The whole thing takes maybe half a second, and you barely think about it.
+
+But that "barely thinking about it" part is the whole story.
+
+For my master's thesis, I studied what happens to these movements when you have to think harder — when the task demands more of your working memory, your executive function, your cognitive resources. The path you draw looks the same. But the *way* you move changes, in ways that are measurable, consistent, and potentially relevant as biomarkers for cognitive impairment.
+
+Rather than just describe the analysis, I want to walk you through it. Below is a version of the exact task we used in the study, adapted for your mouse or trackpad instead of an Apple Pencil on an iPad. Complete it, and this page will analyze your own movement data, step by step, using the same pipeline from the thesis.
+
+## The Task
+
+This is a digital adaptation of the Trail Making Test, a component of the Montreal Cognitive Assessment (MoCA) — one of the most widely used paper-based cognitive screeners. The original involves connecting numbered circles with a pencil on paper. We digitized it to capture the movement data that paper discards.
+
+There are two conditions:
+
+- **Numbers only** (1 → 2 → 3 → ...): the low cognitive load condition. The sequence is trivial — just count.
+- **Alternating** (1 → A → 2 → B → 3 → C → ...): the high cognitive load condition. You're maintaining two sequences simultaneously and switching between them. This demands working memory and task-switching — classic executive function.
+
+The difference in cognitive demand between these tasks is well-established in the clinical literature. The question is whether you can detect that difference in the movement data alone — not *what* was drawn, but *how* it was drawn.
+
+Try both conditions. Click on the first target, hold the mouse down, and draw continuously through each target in sequence. If you lift the mouse before reaching the next target, it resets.
+
+<ThesisConnectDots client:load />
+
+## Step 1: What Got Captured
+
+Every few milliseconds while you were drawing, we recorded the position of your cursor and a timestamp. In the original study, we used an iPad with an Apple Pencil sampling at approximately 240 Hz — a new data point roughly every 4 milliseconds. The Apple Pencil also captures force and tilt, but we restricted the analysis to position and time to stay comparable to classical motor control work (Viviani & Schneider, 1991).
+
+Your mouse or trackpad samples somewhat slower (typically 60–120 Hz depending on your hardware and browser), but the principle is identical: a time series of (x, y, t) tuples.
+
+<PipelineStep step="raw-data" client:load />
+
+Notice the `Δt` column — the time between consecutive samples. This is your effective sampling interval. The more consistent these intervals are, the cleaner your downstream computations will be. Irregularity here is one of the practical challenges of working with consumer-grade input devices rather than research-grade motion capture systems.
+
+## Step 2: Breaking the Path Into Movements
+
+Your full trail is one continuous drawing, but it's composed of distinct goal-directed movements. With 12 targets, you made 11 individual sub-trails — one for each transition between consecutive targets.
+
+This segmentation is critical. Each sub-trail is an independent observation of how you execute a point-to-point movement. Instead of one noisy whole-task measurement, we get 11 observations of the same underlying motor behavior, each with its own kinematic profile. That's 11 observations per condition, per participant — a meaningful sample for within-subject analysis.
+
+We segment by detecting when the cursor enters each target circle. Everything between entering target *n* and entering target *n+1* constitutes one sub-trail.
+
+<PipelineStep step="segments" client:load />
+
+Each segment has a different number of samples and a different duration, which is expected — the distance between targets varies, and your movement speed isn't constant. What matters is whether the *structure* of each movement — its velocity profile, its timing — follows consistent patterns.
+
+## Step 3: From Position to Velocity
+
+Position tells us where you were. But to understand *how* you moved, we need velocity — the rate of change of position over time.
+
+From first principles: if you're at position (x₁, y₁) at time t₁ and position (x₂, y₂) at time t₂, your velocity components are:
+
+```
+Vx = (x₂ - x₁) / (t₂ - t₁)
+Vy = (y₂ - y₁) / (t₂ - t₁)
+```
+
+The total speed — the magnitude of the velocity vector — is then:
+
+```
+V = √(Vx² + Vy²)
+```
+
+This is the Euclidean distance between consecutive samples, divided by the time between them. Nothing exotic — the same definition of velocity from introductory physics, applied to discrete samples.
+
+What's interesting is the *shape* of the resulting velocity profile. For a simple point-to-point movement, you'll typically see something resembling a bell curve: acceleration from rest, a peak somewhere in the middle, then deceleration into the target. This bell-shaped profile is one of the most robust findings in motor control research. It appears across effectors (arm, hand, eye), across species, and across movement scales.
+
+The visualization below applies a light moving-average filter to reduce noise from the discrete sampling. Use the dropdown to examine individual sub-trails.
+
+<PipelineStep step="velocity" client:load />
+
+Pay attention to where the peak occurs within each movement. In well-practiced, low-demand movements, the peak velocity timing tends to be remarkably stable — your motor system has a consistent temporal signature. This stability is related to a property called *isochrony*, described by Viviani and Schneider (1991): the invariance of certain timing features of movement, independent of the spatial characteristics of the path.
+
+## Step 4: What Changes Under Cognitive Load?
+
+Here's where the analysis gets interesting. If you completed both conditions, the results below will compare your kinematics across them.
+
+<PipelineStep step="peak-timing" client:load />
+
+### The spatial features don't change
+
+In the thesis, we found no significant difference in path curvature between the low and high cognitive load conditions (p > 0.05). The shapes you drew are essentially the same regardless of how hard you're thinking. This is consistent with prior work showing that spatial path geometry is conserved during intentional, goal-directed planar movements (Atkeson & Hollerbach, 1985) and more complex tasks like obstacle avoidance (Torres & Andersen, 2006).
+
+### But the temporal features do
+
+Two things change:
+
+**You slow down.** Average sub-trail velocity was significantly lower in the alternating condition (p = 0.01, Wilcoxon rank-sum). This is expected and consistent with the broader literature — cognitive load competes for the resources that drive motor execution (Rosenblum & Luria, 2016).
+
+**Your peak velocity timing shifts.** This is the more novel finding. The normalized position of peak velocity within each sub-trail — *when* in the movement you hit your fastest speed — changed significantly across conditions (p < 0.001, Cohen's d = 0.62, a medium effect size).
+
+This second finding matters because it directly tests the isochrony principle. In low-cognitive-load, quasi-automatic movements, the timing of peak velocity is stable. Our results suggest that this stability breaks down when cognitive resources are being diverted — when the brain is simultaneously planning what comes next (the letter-number alternation) while executing the current movement.
+
+## Why This Matters
+
+This is a proof of concept. If cognitive load alone can measurably shift the temporal dynamics of drawing movements in healthy controls, what happens in populations with actual cognitive impairment?
+
+Dementia is notoriously underdiagnosed — estimates range from 55% to 68% of cases going undetected (Lang et al., 2017). Current screening relies on paper-based tests like the MoCA, which are quick and accessible but inherently limited: they capture what was drawn, not how it was drawn. The motor dynamics that we've shown to be sensitive to cognitive state are simply discarded.
+
+The path forward involves extending this analysis to clinical populations — people with Alzheimer's disease, frontotemporal dementia, Lewy body dementia, vascular dementia — and testing whether these kinematic signatures differ across subtypes in ways useful for differential diagnosis. Different dementias affect different neural circuits, which should produce distinct motor signatures.
+
+The appeal of this approach is accessibility. You don't need an MRI, a PET scan, or a lumbar puncture. You need a tablet and a stylus — devices that already exist in hundreds of millions of households. The data capture takes minutes. The analysis, as you've just seen, is straightforward enough to run in a browser.
+
+The hard part isn't the technology. It's building normative baselines across demographics, recruiting clinical populations, and validating that these biomarkers are robust enough to matter. But the foundation — demonstrating that movement kinematics carry interpretable information about cognitive state, captured on consumer hardware — is what this thesis establishes.

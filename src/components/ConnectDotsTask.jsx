@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const ConnectDotsTask = () => {
+const ConnectDotsTask = ({ onComplete } = {}) => {
   const canvasRef = useRef(null);
   const [difficulty, setDifficulty] = useState('numbers'); // 'numbers' or 'alternating'
   const [targets, setTargets] = useState([]);
@@ -138,6 +138,19 @@ const ConnectDotsTask = () => {
     });
 
   }, [targets, currentIndex, trajectoryData, currentStroke]);
+
+  useEffect(() => {
+    if (completed && onComplete) {
+      onComplete({
+        difficulty,
+        trajectoryData,
+        targets: targets.map(t => ({ x: t.x, y: t.y, label: t.label, index: t.index })),
+        totalTime: trajectoryData.length > 0
+          ? trajectoryData[trajectoryData.length - 1][trajectoryData[trajectoryData.length - 1].length - 1].timestamp
+          : 0
+      });
+    }
+  }, [completed]);
 
   const resetTask = () => {
     setTargets(generateTargets(difficulty));
