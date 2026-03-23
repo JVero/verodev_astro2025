@@ -1,0 +1,150 @@
+<script>
+  function initSidenotes() {
+    const SIDENOTE_COL_WIDTH = 220;
+    const SIDENOTE_GAP = 24;
+    const WIDE_BREAKPOINT = 1080; // max-w-3xl (768) + gap + col + padding
+
+    const container = document.querySelector('.prose-vero');
+    const sidenotesDiv = document.querySelector('.sidenotes-container');
+    if (!container || !sidenotesDiv) return;
+
+    const sidenotes = Array.from(sidenotesDiv.querySelectorAll('.sidenote'));
+    if (sidenotes.length === 0) return;
+
+    let popoverEl = null;
+    let activeNote = null;
+
+    function isWide() {
+      return window.innerWidth >= WIDE_BREAKPOINT;
+    }
+
+    function positionSidenotes() {
+      if (!isWide()) {
+        sidenotesDiv.style.display = 'none';
+        return;
+      }
+
+      // Position the container in the right margin
+      container.style.position = 'relative';
+      container.style.overflow = 'visible';
+      sidenotesDiv.style.display = 'block';
+      sidenotesDiv.style.position = 'absolute';
+      sidenotesDiv.style.top = '0';
+      sidenotesDiv.style.left = `calc(100% + ${SIDENOTE_GAP}px)`;
+      sidenotesDiv.style.width = `${SIDENOTE_COL_WIDTH}px`;
+
+      const containerRect = container.getBoundingClientRect();
+      const containerTop = containerRect.top + window.scrollY;
+      let lastBottom = 0;
+
+      for (const sn of sidenotes) {
+        const num = sn.dataset.note;
+        const ref = container.querySelector(`.sidenote-ref[data-note="${num}"]`);
+        if (!ref) continue;
+
+        const refRect = ref.getBoundingClientRect();
+        const idealTop = refRect.top + window.scrollY - containerTop;
+        const top = Math.max(idealTop, lastBottom);
+
+        sn.style.position = 'absolute';
+        sn.style.top = `${top}px`;
+        sn.style.width = `${SIDENOTE_COL_WIDTH}px`;
+
+        // Use actual rendered height for overlap avoidance
+        lastBottom = top + sn.offsetHeight + 8;
+      }
+    }
+
+    function dismissPopover() {
+      if (popoverEl) {
+        popoverEl.remove();
+        popoverEl = null;
+        activeNote = null;
+      }
+    }
+
+    function showPopover(refEl, noteNum) {
+      dismissPopover();
+      const sn = sidenotesDiv.querySelector(`.sidenote[data-note="${noteNum}"]`);
+      if (!sn) return;
+
+      activeNote = noteNum;
+      popoverEl = document.createElement('div');
+      popoverEl.className = 'sidenote-popover';
+      // Copy sidenote content, excluding the label <sup>
+      const content = sn.cloneNode(true);
+      const label = content.querySelector('.sidenote-label');
+      if (label) label.remove();
+      popoverEl.innerHTML = `<sup class="sidenote-label">${noteNum}</sup> ${content.innerHTML.trim()}`;
+
+      document.body.appendChild(popoverEl);
+
+      // Position below the ref (absolute on body, so use scrollY)
+      const rect = refEl.getBoundingClientRect();
+      let left = rect.left + rect.width / 2 - 140;
+      left = Math.max(8, Math.min(left, window.innerWidth - 288));
+      const top = rect.bottom + window.scrollY + 8;
+
+      popoverEl.style.left = `${left}px`;
+      popoverEl.style.top = `${top}px`;
+    }
+
+    // Click handler for refs
+    container.addEventListener('click', (e) => {
+      const sup = e.target.closest('.sidenote-ref');
+      if (!sup) return;
+      const num = sup.dataset.note;
+
+      if (isWide()) {
+        const sn = sidenotesDiv.querySelector(`.sidenote[data-note="${num}"]`);
+        if (sn) sn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        if (activeNote === num) {
+          dismissPopover();
+        } else {
+          showPopover(sup, num);
+        }
+      }
+    });
+
+    // Dismiss popover on outside click
+    document.addEventListener('click', (e) => {
+      if (!popoverEl) return;
+      if (e.target.closest('.sidenote-ref') || e.target.closest('.sidenote-popover')) return;
+      dismissPopover();
+    });
+
+    // Escape dismisses popover
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') dismissPopover();
+    });
+
+    // Keyboard activation on refs
+    container.querySelectorAll('.sidenote-ref').forEach(ref => {
+      ref.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          ref.click();
+        }
+      });
+    });
+
+    // Initial position + debounced resize
+    positionSidenotes();
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        dismissPopover();
+        positionSidenotes();
+      }, 150);
+    });
+  }
+
+  // Run after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSidenotes);
+  } else {
+    initSidenotes();
+  }
+</script>
