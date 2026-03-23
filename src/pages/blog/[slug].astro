@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import SidenotesInit from '../../components/SidenotesInit.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -16,7 +17,7 @@ const { Content } = await render(post);
 
 <Layout>
   <main class="max-w-3xl mx-auto px-6 py-12 relative">
-    <article class="bg-vero-card rounded-lg py-5 px-6 shadow-warm border border-vero-border animate-fade-in relative overflow-hidden">
+    <article class="bg-vero-card rounded-lg py-5 px-6 shadow-warm border border-vero-border animate-fade-in relative">
       <header class="mb-8 pb-6 border-b border-vero-border animate-slide-up">
         <h1 class="text-3xl font-normal mb-3 font-serif text-vero-text" style="letter-spacing: -0.025em;">
           {post.data.title}
@@ -30,6 +31,7 @@ const { Content } = await render(post);
       <div class="prose prose-vero max-w-none animate-fade-in">
         <Content />
       </div>
+      <SidenotesInit />
     </article>
   </main>
 </Layout>
