@@ -69,6 +69,77 @@ button, a, select, input, [onClick] {
   color: #7A3526;
 }
 
+/* --- Sidenotes (Tufte-style margin notes) --- */
+.sidenotes-container {
+  display: none; /* Hidden by default, client JS positions and reveals */
+}
+
+.sidenote-ref {
+  color: #9C4430;
+  cursor: pointer;
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  top: -0.4em;
+}
+
+.sidenote-ref:hover {
+  color: #7A3526;
+}
+
+.sidenote-ref:focus-visible {
+  outline: 2px solid #9C4430;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.sidenote {
+  position: absolute;
+  width: 220px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #A8A39C;
+  font-family: -apple-system, system-ui, "Segoe UI", sans-serif;
+}
+
+.sidenote a {
+  color: #9C4430;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(156, 68, 48, 0.25);
+}
+
+.sidenote a:hover {
+  color: #7A3526;
+}
+
+.sidenote-label {
+  color: #9C4430;
+  font-size: 0.8em;
+  margin-right: 3px;
+}
+
+/* Popover (narrow viewport) */
+.sidenote-popover {
+  position: absolute;
+  z-index: 50;
+  max-width: 280px;
+  padding: 12px;
+  background: #FAF8F5;
+  border: 1px solid #DDD9D2;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(120, 110, 100, 0.12);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #5C5852;
+  font-family: -apple-system, system-ui, "Segoe UI", sans-serif;
+}
+
+.sidenote-popover a {
+  color: #9C4430;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(156, 68, 48, 0.25);
+}
+
 /* First paragraph drop cap in blog posts */
 .prose-vero > :where(p:first-of-type):not(:where([class~="not-prose"] *))::first-letter {
   float: left;
