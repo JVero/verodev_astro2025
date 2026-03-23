@@ -1,4 +1,13 @@
 <script>
+  function inlineMarkdownToHtml(md) {
+    return md
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g,
+        '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  }
+
   function initSidenotes() {
     const SIDENOTE_COL_WIDTH = 220;
     const SIDENOTE_GAP = 24;
@@ -10,6 +19,13 @@
 
     const sidenotes = Array.from(sidenotesDiv.querySelectorAll('.sidenote'));
     if (sidenotes.length === 0) return;
+
+    // Render sidenote content from data-content attribute (raw markdown)
+    for (const sn of sidenotes) {
+      const raw = sn.dataset.content || '';
+      const num = sn.dataset.note;
+      sn.innerHTML = `<sup class="sidenote-label">${num}</sup> ${inlineMarkdownToHtml(raw)}`;
+    }
 
     let popoverEl = null;
     let activeNote = null;
@@ -71,11 +87,8 @@
       activeNote = noteNum;
       popoverEl = document.createElement('div');
       popoverEl.className = 'sidenote-popover';
-      // Copy sidenote content, excluding the label <sup>
-      const content = sn.cloneNode(true);
-      const label = content.querySelector('.sidenote-label');
-      if (label) label.remove();
-      popoverEl.innerHTML = `<sup class="sidenote-label">${noteNum}</sup> ${content.innerHTML.trim()}`;
+      const raw = sn.dataset.content || '';
+      popoverEl.innerHTML = `<sup class="sidenote-label">${noteNum}</sup> ${inlineMarkdownToHtml(raw)}`;
 
       document.body.appendChild(popoverEl);
 
