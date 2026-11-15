@@ -1,5 +1,8 @@
 {
   "installCommand": "npm install --legacy-peer-deps",
   "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/blog/sfn2026", "destination": "/blog/sfn2026.pdf", "permanent": false }
+  ]
 }
